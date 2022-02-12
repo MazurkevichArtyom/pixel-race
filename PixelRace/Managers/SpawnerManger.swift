@@ -343,7 +343,7 @@ class SpawnerManager {
         let image = UIImage(named: "player_car")
         myCar.image = image
         myCar.layer.zPosition = 10
-        myCar.applyShadow()
+        myCar.applyShadow(offset: CGSize(width: 7, height: 6))
 
         playersCar = myCar
 
@@ -540,7 +540,7 @@ class SpawnerManager {
         let civilCarImage = UIImage(named: "enemy_car")
         civilCar.image = civilCarImage
         civilCar.layer.zPosition = 9
-        civilCar.applyShadow()
+        civilCar.applyShadow(offset: CGSize(width: -7, height: -6))
         
         viewController.view.addSubview(civilCar)
         cachedCivilCars[lane]?.append(civilCar)
@@ -591,7 +591,7 @@ class SpawnerManager {
         let truckImage = UIImage(named: "truck")
         truckObject.image = truckImage
         truckObject.layer.zPosition = 9
-        truckObject.applyShadow()
+        truckObject.applyShadow(offset: CGSize(width: -7, height: -6))
         
         viewController.view.addSubview(truckObject)
         cachedTrucks[lane]?.append(truckObject)
