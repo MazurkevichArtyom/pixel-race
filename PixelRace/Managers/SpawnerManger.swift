@@ -29,6 +29,11 @@ class SpawnerManager {
     private var bushSize: CGSize?
     private var separateLineSize: CGSize?
     
+    private var startYOfSideObjects: CGFloat?
+    private var endYOfSideObjects: CGFloat?
+    private var startYOfTrafficObjects: CGFloat?
+    private var endYOfTrafficObjects: CGFloat?
+
     private var laneSeparatorsTimer: Timer?
     private var leftSideItemsTimer: Timer?
     private var rightSideItemsTimer: Timer?
@@ -186,20 +191,22 @@ class SpawnerManager {
     }
     
     @objc private func generateEnemysCars() {
-        guard let viewController = gameViewController else {
+        guard let vehicle = generateRandomVehicle() else {
             return
         }
         
-        guard let vehicle = generateRandomVehicle() else {
+        guard let endY = endYOfTrafficObjects else {
             return
         }
         
         let enemysCarInitialCenter = vehicle.center
         
         CollisionManager.shared.addObservableObject(observable: vehicle)
+        let duration = vehicle.accessibilityIdentifier == "truck" ? 2.3 : 2.0
+        print(duration)
                 
-        UIView.animate(withDuration: vehicle.accessibilityIdentifier == "truck" ? 2.3 : 2, delay: 0, options: .curveLinear) {
-            vehicle.center = CGPoint(x: vehicle.center.x, y: viewController.view.frame.height + vehicle.frame.height)
+        UIView.animate(withDuration: duration, delay: 0, options: .curveLinear) {
+            vehicle.center = CGPoint(x: vehicle.center.x, y: endY)
         } completion: { finish in
             vehicle.center = enemysCarInitialCenter
             vehicle.isHidden = true
@@ -210,18 +217,18 @@ class SpawnerManager {
     }
     
     private func addAndAnimateSideItem(side: Side) {
-        guard let viewController = gameViewController else {
+        guard let sideObject = generateRandomSideItem(side: side) else {
             return
         }
         
-        guard let sideObject = generateRandomSideItem(side: side) else {
+        guard let endY = endYOfSideObjects else {
             return
         }
         
         let sideObjectInitialCenter = sideObject.center
         
         UIView.animate(withDuration: 2.5, delay: 0, options: .curveLinear) {
-            sideObject.center = CGPoint(x: sideObject.center.x, y: viewController.view.frame.height + sideObject.frame.height)
+            sideObject.center = CGPoint(x: sideObject.center.x, y: endY)
         } completion: { finish in
             sideObject.center = sideObjectInitialCenter
             sideObject.isHidden = true
@@ -411,6 +418,10 @@ class SpawnerManager {
             return nil
         }
         
+        guard let startY = startYOfSideObjects else {
+            return nil
+        }
+        
         guard let tree = treeSize else {
             return nil
         }
@@ -428,7 +439,7 @@ class SpawnerManager {
             treeX = view.width - ((sideArea.width + tree.width) / 2.0)
         }
         
-        let object = UIImageView(frame: CGRect(x: treeX, y: -tree.height, width: tree.width, height: tree.height))
+        let object = UIImageView(frame: CGRect(x: treeX, y: startY, width: tree.width, height: tree.height))
         object.contentMode = .scaleAspectFit
         object.isUserInteractionEnabled = false
         let objectImage = UIImage(named: "tree")
@@ -457,6 +468,10 @@ class SpawnerManager {
             return nil
         }
         
+        guard let startY = startYOfSideObjects else {
+            return nil
+        }
+        
         guard let bush = bushSize else {
             return nil
         }
@@ -474,7 +489,7 @@ class SpawnerManager {
             bushX = view.width - ((sideArea.width + bush.width) / 2.0)
         }
         
-        let object = UIImageView(frame: CGRect(x: bushX, y: -bush.height, width: bush.width, height: bush.height))
+        let object = UIImageView(frame: CGRect(x: bushX, y: startY, width: bush.width, height: bush.height))
         object.contentMode = .scaleAspectFit
         object.isUserInteractionEnabled = false
         let objectImage = UIImage(named: "bush")
@@ -517,6 +532,10 @@ class SpawnerManager {
             return nil
         }
         
+        guard let startY = startYOfTrafficObjects else {
+            return nil
+        }
+        
         guard let car = carSize else {
             return nil
         }
@@ -532,7 +551,7 @@ class SpawnerManager {
             carX = sideArea.width + 2 * roadLane.width + (roadLane.width - car.width) / 2.0
         }
 
-        let civilCar = UIImageView(frame: CGRect(x: carX, y: -car.height, width: car.width, height: car.height))
+        let civilCar = UIImageView(frame: CGRect(x: carX, y: startY, width: car.width, height: car.height))
         civilCar.transform = CGAffineTransform(rotationAngle: .pi)
         civilCar.contentMode = .scaleAspectFit
         civilCar.isUserInteractionEnabled = false
@@ -567,6 +586,10 @@ class SpawnerManager {
             return nil
         }
         
+        guard let startY = startYOfTrafficObjects else {
+            return nil
+        }
+        
         guard let truck = truckSize else {
             return nil
         }
@@ -582,10 +605,11 @@ class SpawnerManager {
             truckX = sideArea.width + 2 * roadLane.width + (roadLane.width - truck.width) / 2.0
         }
 
-        let truckObject = UIImageView(frame: CGRect(x: truckX, y: -truck.height, width: truck.width, height: truck.height))
+        let truckObject = UIImageView(frame: CGRect(x: truckX, y: startY, width: truck.width, height: truck.height))
         truckObject.transform = CGAffineTransform(rotationAngle: .pi)
         truckObject.contentMode = .scaleAspectFit
         truckObject.isUserInteractionEnabled = false
+        truckObject.accessibilityIdentifier = "truck"
         let truckImage = UIImage(named: "truck")
         truckObject.image = truckImage
         truckObject.layer.zPosition = 9
@@ -628,6 +652,9 @@ class SpawnerManager {
         let truckHeight = truckWidth * 11.0 / 4.0
         truckSize = CGSize(width: truckWidth, height: truckHeight)
         
+        startYOfTrafficObjects = -max(carHeight, truckHeight)
+        endYOfTrafficObjects = viewSize.height + max(carHeight, truckHeight)
+        
         let treeWidth = sideAreaWidth * 0.6
         let treeHeight = treeWidth * 9 / 5
         treeSize = CGSize(width: treeWidth, height: treeHeight)
@@ -635,6 +662,9 @@ class SpawnerManager {
         let bushWidth = sideAreaWidth * 0.4
         let bushHeight = bushWidth * 5 / 6
         bushSize = CGSize(width: bushWidth, height: bushHeight)
+        
+        startYOfSideObjects = -max(treeHeight, bushHeight)
+        endYOfSideObjects = viewSize.height + max(treeHeight, bushHeight)
         
         let separateLineWidth = carWidth * 0.15
         let separateLineHeight = separateLineWidth * 6
