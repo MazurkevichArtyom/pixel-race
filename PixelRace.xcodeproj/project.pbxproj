@@ -15,6 +15,7 @@
 		9921894427B1C45F00E12EFF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9921894227B1C45F00E12EFF /* LaunchScreen.storyboard */; };
 		9921894D27B1C48A00E12EFF /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9921894C27B1C48A00E12EFF /* GameViewController.swift */; };
 		993EF14A27B7F44C002B8B6D /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993EF14927B7F44C002B8B6D /* UIColor+Hex.swift */; };
+		993EF14C27B7F86B002B8B6D /* UIView+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993EF14B27B7F86B002B8B6D /* UIView+Utilities.swift */; };
 		995C282827B46A80004CF564 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995C282727B46A80004CF564 /* GameManager.swift */; };
 		995C282B27B47323004CF564 /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995C282A27B47323004CF564 /* Move.swift */; };
 		995C282D27B47908004CF564 /* Lane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995C282C27B47908004CF564 /* Lane.swift */; };
@@ -34,6 +35,7 @@
 		9921894527B1C45F00E12EFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9921894C27B1C48A00E12EFF /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		993EF14927B7F44C002B8B6D /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		993EF14B27B7F86B002B8B6D /* UIView+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Utilities.swift"; sourceTree = "<group>"; };
 		995C282727B46A80004CF564 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		995C282A27B47323004CF564 /* Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
 		995C282C27B47908004CF564 /* Lane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lane.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				993EF14927B7F44C002B8B6D /* UIColor+Hex.swift */,
+				993EF14B27B7F86B002B8B6D /* UIView+Utilities.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 				995C282F27B47A03004CF564 /* Side.swift in Sources */,
 				99C34F9627B60DF600B21DBF /* CollisionManager.swift in Sources */,
 				99C34F9127B605C600B21DBF /* SpawnerManger.swift in Sources */,
+				993EF14C27B7F86B002B8B6D /* UIView+Utilities.swift in Sources */,
 				993EF14A27B7F44C002B8B6D /* UIColor+Hex.swift in Sources */,
 				9921893827B1C45F00E12EFF /* AppDelegate.swift in Sources */,
 				9921893A27B1C45F00E12EFF /* SceneDelegate.swift in Sources */,
