@@ -11,12 +11,15 @@ import UIKit
 class GameManager {
     static let shared = GameManager()
     
+    private let rotationAngle: CGFloat = 15 * .pi / 180
+    
     private let screenSize: CGSize
-    private let roadLaneWidth: Double
+    private let sideWidth: CGFloat
+    private let roadLaneWidth: CGFloat
     
     init() {
         screenSize = UIScreen.main.bounds.size
-        let sideWidth = screenSize.width * 0.15
+        sideWidth = screenSize.width * 0.15
         roadLaneWidth = (screenSize.width - 2 * sideWidth) / 3
     }
     
@@ -26,20 +29,25 @@ class GameManager {
         }
         
         var destinationPoint = car.center
+        var carRotationAngle = rotationAngle
         
         switch move {
         case .left:
-            car.transform = CGAffineTransform(rotationAngle: -15 * .pi / 180)
+            carRotationAngle = -rotationAngle
             destinationPoint = CGPoint(x: car.center.x - roadLaneWidth, y: car.center.y)
         case .right:
-            car.transform = CGAffineTransform(rotationAngle: 15 * .pi / 180)
             destinationPoint = CGPoint(x: car.center.x + roadLaneWidth, y: car.center.y)
         }
         
-        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
-            car.center = destinationPoint
-        } completion: { finish in
-            car.transform = CGAffineTransform(rotationAngle: 0)
+        if destinationPoint.x > sideWidth && destinationPoint.x < screenSize.width - sideWidth {
+            car.transform = CGAffineTransform(rotationAngle: carRotationAngle)
+            
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {
+                car.center = destinationPoint
+            } completion: { finish in
+                car.transform = CGAffineTransform(rotationAngle: 0)
+            }
         }
+
     }
 }
