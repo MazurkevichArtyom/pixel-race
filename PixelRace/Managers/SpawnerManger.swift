@@ -27,6 +27,7 @@ class SpawnerManager {
     private var truckSize: CGSize?
     private var treeSize: CGSize?
     private var bushSize: CGSize?
+    private var roadSignSize: CGSize?
     private var separateLineSize: CGSize?
     
     private var startYOfSideObjects: CGFloat?
@@ -43,6 +44,7 @@ class SpawnerManager {
     private var cachedTrucks: [Lane: [UIImageView]] = [.left: [UIImageView](), .middle: [UIImageView](), .right: [UIImageView]()]
     private var cachedTrees: [Side: [UIImageView]] = [.left: [UIImageView](), .right :[UIImageView]()]
     private var cachedBushes: [Side: [UIImageView]] = [.left: [UIImageView](), .right :[UIImageView]()]
+    private var cachedRoadSignes: [Side: [UIImageView]] = [.left: [UIImageView](), .right :[UIImageView]()]
     private var cachedLaneSeparators: [Side: [UIView]] = [.left: [UIView](), .right :[UIView]()]
     
     func setupViewController(viewController: UIViewController) {
@@ -203,8 +205,7 @@ class SpawnerManager {
         
         CollisionManager.shared.addObservableObject(observable: vehicle)
         let duration = vehicle.accessibilityIdentifier == "truck" ? 2.3 : 2.0
-        print(duration)
-                
+        
         UIView.animate(withDuration: duration, delay: 0, options: .curveLinear) {
             vehicle.center = CGPoint(x: vehicle.center.x, y: endY)
         } completion: { finish in
@@ -501,13 +502,65 @@ class SpawnerManager {
         return object
     }
     
+    private func generateRoadSign(side: Side) -> UIImageView? {
+        if let cachedRoadSign = cachedRoadSignes[side]?.first(where: { imageView in
+            return imageView.isHidden
+        })
+        {
+            cachedRoadSign.isHidden = false
+            return cachedRoadSign
+        }
+        
+        guard let sideArea = sideAreaSize else {
+            return nil
+        }
+        
+        guard let view = viewSize else {
+            return nil
+        }
+        
+        guard let startY = startYOfSideObjects else {
+            return nil
+        }
+        
+        guard let roadSign = roadSignSize else {
+            return nil
+        }
+        
+        guard let viewController = gameViewController else {
+            return nil
+        }
+        
+        var roadSignX: Double = 0
+        
+        switch side {
+        case .left:
+            roadSignX = (sideArea.width - roadSign.width) / 2.0
+        case .right:
+            roadSignX = view.width - ((sideArea.width + roadSign.width) / 2.0)
+        }
+        
+        let object = UIImageView(frame: CGRect(x: roadSignX, y: startY, width: roadSign.width, height: roadSign.height))
+        object.contentMode = .scaleAspectFit
+        object.isUserInteractionEnabled = false
+        let objectImage = UIImage(named: "road_sign_\(Int.random(in: 1...2))")
+        object.image = objectImage
+        
+        viewController.view.addSubview(object)
+        cachedRoadSignes[side]?.append(object)
+        
+        return object
+    }
+    
     private func generateRandomSideItem(side: Side) -> UIImageView? {
-        let randomItem = Int.random(in: 0...2)
+        let randomItem = Int.random(in: 0...3)
         
         if (randomItem == 0) {
             return generateBush(side: side)
-        } else {
+        } else if (randomItem == 1 || randomItem == 2) {
             return generateTree(side: side)
+        } else {
+            return generateRoadSign(side: side)
         }
     }
 
@@ -663,8 +716,12 @@ class SpawnerManager {
         let bushHeight = bushWidth * 5 / 6
         bushSize = CGSize(width: bushWidth, height: bushHeight)
         
-        startYOfSideObjects = -max(treeHeight, bushHeight)
-        endYOfSideObjects = viewSize.height + max(treeHeight, bushHeight)
+        let roadSignWidth = bushWidth
+        let roadSignHeight = roadSignWidth * 23.0 / 12.0
+        roadSignSize = CGSize(width: roadSignWidth, height: roadSignHeight)
+        
+        startYOfSideObjects = -max(treeHeight, bushHeight, roadSignHeight)
+        endYOfSideObjects = viewSize.height + max(treeHeight, bushHeight, roadSignHeight)
         
         let separateLineWidth = carWidth * 0.15
         let separateLineHeight = separateLineWidth * 6
