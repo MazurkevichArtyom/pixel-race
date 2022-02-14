@@ -20,6 +20,8 @@
 		995C282B27B47323004CF564 /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995C282A27B47323004CF564 /* Move.swift */; };
 		995C282D27B47908004CF564 /* Lane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995C282C27B47908004CF564 /* Lane.swift */; };
 		995C282F27B47A03004CF564 /* Side.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995C282E27B47A03004CF564 /* Side.swift */; };
+		995F08FE27B9116E00B188E0 /* SideObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995F08FD27B9116E00B188E0 /* SideObject.swift */; };
+		995F090027B911EA00B188E0 /* TrafficObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995F08FF27B911EA00B188E0 /* TrafficObject.swift */; };
 		99C34F9127B605C600B21DBF /* SpawnerManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C34F9027B605C600B21DBF /* SpawnerManger.swift */; };
 		99C34F9627B60DF600B21DBF /* CollisionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C34F9527B60DF600B21DBF /* CollisionManager.swift */; };
 /* End PBXBuildFile section */
@@ -40,6 +42,8 @@
 		995C282A27B47323004CF564 /* Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
 		995C282C27B47908004CF564 /* Lane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lane.swift; sourceTree = "<group>"; };
 		995C282E27B47A03004CF564 /* Side.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Side.swift; sourceTree = "<group>"; };
+		995F08FD27B9116E00B188E0 /* SideObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideObject.swift; sourceTree = "<group>"; };
+		995F08FF27B911EA00B188E0 /* TrafficObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficObject.swift; sourceTree = "<group>"; };
 		99C34F9027B605C600B21DBF /* SpawnerManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnerManger.swift; sourceTree = "<group>"; };
 		99C34F9527B60DF600B21DBF /* CollisionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,6 +126,8 @@
 				995C282A27B47323004CF564 /* Move.swift */,
 				995C282C27B47908004CF564 /* Lane.swift */,
 				995C282E27B47A03004CF564 /* Side.swift */,
+				995F08FD27B9116E00B188E0 /* SideObject.swift */,
+				995F08FF27B911EA00B188E0 /* TrafficObject.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -199,6 +205,7 @@
 			files = (
 				9921894D27B1C48A00E12EFF /* GameViewController.swift in Sources */,
 				9921893C27B1C45F00E12EFF /* ViewController.swift in Sources */,
+				995F08FE27B9116E00B188E0 /* SideObject.swift in Sources */,
 				995C282F27B47A03004CF564 /* Side.swift in Sources */,
 				99C34F9627B60DF600B21DBF /* CollisionManager.swift in Sources */,
 				99C34F9127B605C600B21DBF /* SpawnerManger.swift in Sources */,
@@ -206,6 +213,7 @@
 				993EF14A27B7F44C002B8B6D /* UIColor+Hex.swift in Sources */,
 				9921893827B1C45F00E12EFF /* AppDelegate.swift in Sources */,
 				9921893A27B1C45F00E12EFF /* SceneDelegate.swift in Sources */,
+				995F090027B911EA00B188E0 /* TrafficObject.swift in Sources */,
 				995C282B27B47323004CF564 /* Move.swift in Sources */,
 				995C282827B46A80004CF564 /* GameManager.swift in Sources */,
 				995C282D27B47908004CF564 /* Lane.swift in Sources */,

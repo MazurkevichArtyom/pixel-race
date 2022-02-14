@@ -9,10 +9,16 @@ import UIKit
 
 class GameViewController: UIViewController {
     private var debugTimer: Timer?
+    
+    // GameManager init(VC) - SpawnerManager and CollisionManager
+    // Don't need singleton
+    // VC should know only aboug GameManager
+    // Need to move all animations to GameManager
+    // Need to create GameObject with speed proprty
 
     override func loadView() {
         let customView = UIView(frame: UIScreen.main.bounds)
-        customView.backgroundColor = .darkGray
+        customView.backgroundColor = .white
         view = customView
         
         setupControlGestures()

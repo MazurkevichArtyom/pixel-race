@@ -15,20 +15,27 @@ class SpawnerManager {
 
     private var gameViewController: UIViewController?
     
-    private let sideColor = UIColor(hex: 0x76AC1F)
-    private let laneColor = UIColor(hex: 0xA0A0A0)
-    private let sideSeparatorColor = UIColor(hex: 0x787878)
+    private let sideColor = UIColor(red: 118 / 255.0, green: 172 / 255.0, blue: 31 / 255.0, alpha: 1.0)
+    private let laneColor = UIColor(red: 160 / 255.0, green: 160 / 255.0, blue: 160 / 255.0, alpha: 1.0)
+    private let sideSeparatorColor = UIColor(red: 120 / 255.0, green: 120 / 255.0, blue: 120 / 255.0, alpha: 1.0)
     private let separateLineColor = UIColor.white
     
-    private var viewSize: CGSize?
-    private var sideAreaSize: CGSize?
-    private var roadLaneSize: CGSize?
+    var viewSize: CGSize?
+    var sideAreaSize: CGSize?
+    var roadLaneSize: CGSize?
     private var carSize: CGSize?
     private var truckSize: CGSize?
     private var treeSize: CGSize?
     private var bushSize: CGSize?
+    private var roadSignSize: CGSize?
     private var separateLineSize: CGSize?
     
+    private var startYOfSideObjects: CGFloat?
+    private var endYOfSideObjects: CGFloat?
+    private var startYOfTrafficObjects: CGFloat?
+    private var endYOfTrafficObjects: CGFloat?
+
+    // need to move in GameManager
     private var laneSeparatorsTimer: Timer?
     private var leftSideItemsTimer: Timer?
     private var rightSideItemsTimer: Timer?
@@ -38,6 +45,7 @@ class SpawnerManager {
     private var cachedTrucks: [Lane: [UIImageView]] = [.left: [UIImageView](), .middle: [UIImageView](), .right: [UIImageView]()]
     private var cachedTrees: [Side: [UIImageView]] = [.left: [UIImageView](), .right :[UIImageView]()]
     private var cachedBushes: [Side: [UIImageView]] = [.left: [UIImageView](), .right :[UIImageView]()]
+    private var cachedRoadSignes: [Side: [UIImageView]] = [.left: [UIImageView](), .right :[UIImageView]()]
     private var cachedLaneSeparators: [Side: [UIView]] = [.left: [UIView](), .right :[UIView]()]
     
     func setupViewController(viewController: UIViewController) {
@@ -176,30 +184,31 @@ class SpawnerManager {
     }
     
     @objc private func generateRightSideItems() {
-        addAndAnimateSideItem(side: .right)
+        animateGeneratedSideObject(side: .right)
         restartRightSideItemsTimer()
     }
     
     @objc private func generateLeftSideItems() {
-        addAndAnimateSideItem(side: .left)
+        animateGeneratedSideObject(side: .left)
         restartLeftSideItemsTimer()
     }
     
     @objc private func generateEnemysCars() {
-        guard let viewController = gameViewController else {
+        guard let vehicle = generateRandomVehicle() else {
             return
         }
         
-        guard let vehicle = generateRandomVehicle() else {
+        guard let endY = endYOfTrafficObjects else {
             return
         }
         
         let enemysCarInitialCenter = vehicle.center
         
         CollisionManager.shared.addObservableObject(observable: vehicle)
-                
-        UIView.animate(withDuration: vehicle.accessibilityIdentifier == "truck" ? 2.3 : 2, delay: 0, options: .curveLinear) {
-            vehicle.center = CGPoint(x: vehicle.center.x, y: viewController.view.frame.height + vehicle.frame.height)
+        let duration = vehicle.accessibilityIdentifier == "truck" ? 2.3 : 2.0
+        
+        UIView.animate(withDuration: duration, delay: 0, options: .curveLinear) {
+            vehicle.center = CGPoint(x: vehicle.center.x, y: endY)
         } completion: { finish in
             vehicle.center = enemysCarInitialCenter
             vehicle.isHidden = true
@@ -207,25 +216,6 @@ class SpawnerManager {
         }
         
         restartTrafficFlowTimer()
-    }
-    
-    private func addAndAnimateSideItem(side: Side) {
-        guard let viewController = gameViewController else {
-            return
-        }
-        
-        guard let sideObject = generateRandomSideItem(side: side) else {
-            return
-        }
-        
-        let sideObjectInitialCenter = sideObject.center
-        
-        UIView.animate(withDuration: 2.5, delay: 0, options: .curveLinear) {
-            sideObject.center = CGPoint(x: sideObject.center.x, y: viewController.view.frame.height + sideObject.frame.height)
-        } completion: { finish in
-            sideObject.center = sideObjectInitialCenter
-            sideObject.isHidden = true
-        }
     }
     
     private func generateSide(side: Side) {
@@ -350,7 +340,6 @@ class SpawnerManager {
         viewController.view.addSubview(myCar)
     }
     
-    
     private func generateLaneSeparator(side: Side) -> UIView? {
         if let createdSeparator = cachedLaneSeparators[side]?.first(where: { view in
             return view.isHidden
@@ -395,115 +384,118 @@ class SpawnerManager {
         return laneSeparator
     }
     
-    private func generateTree(side: Side) -> UIImageView? {
-        if let createdTree = cachedTrees[side]?.first(where: { imageView in
-            return imageView.isHidden
-        })
-        {
-            createdTree.isHidden = false
-            return createdTree
+    private func animateGeneratedSideObject(side: Side) {
+        guard let sideObject = generateRandomSideObject(side: side) else {
+            return
         }
         
-        guard let sideArea = sideAreaSize else {
-            return nil
+        guard let endY = endYOfSideObjects else {
+            return
         }
         
-        guard let view = viewSize else {
-            return nil
+        let sideObjectInitialCenter = sideObject.center
+        
+        UIView.animate(withDuration: 2.5, delay: 0, options: .curveLinear) {
+            sideObject.center = CGPoint(x: sideObject.center.x, y: endY)
+        } completion: { finish in
+            sideObject.center = sideObjectInitialCenter
+            sideObject.isHidden = true
         }
-        
-        guard let tree = treeSize else {
-            return nil
-        }
-        
-        guard let viewController = gameViewController else {
-            return nil
-        }
-        
-        var treeX: Double = 0
-        
-        switch side {
-        case .left:
-            treeX = (sideArea.width - tree.width) / 2.0
-        case .right:
-            treeX = view.width - ((sideArea.width + tree.width) / 2.0)
-        }
-        
-        let object = UIImageView(frame: CGRect(x: treeX, y: -tree.height, width: tree.width, height: tree.height))
-        object.contentMode = .scaleAspectFit
-        object.isUserInteractionEnabled = false
-        let objectImage = UIImage(named: "tree")
-        object.image = objectImage
-        
-        viewController.view.addSubview(object)
-        cachedTrees[side]?.append(object)
-        
-        return object
     }
     
-    private func generateBush(side: Side) -> UIImageView? {
-        if let createdBush = cachedBushes[side]?.first(where: { imageView in
-            return imageView.isHidden
-        })
-        {
-            createdBush.isHidden = false
-            return createdBush
-        }
+    private func generateRandomSideObject(side: Side) -> UIImageView? {
+        let randomItem = Int.random(in: 0...5)
         
-        guard let sideArea = sideAreaSize else {
-            return nil
-        }
-        
-        guard let view = viewSize else {
-            return nil
-        }
-        
-        guard let bush = bushSize else {
-            return nil
-        }
-        
-        guard let viewController = gameViewController else {
-            return nil
-        }
-        
-        var bushX: Double = 0
-        
-        switch side {
-        case .left:
-            bushX = (sideArea.width - bush.width) / 2.0
-        case .right:
-            bushX = view.width - ((sideArea.width + bush.width) / 2.0)
-        }
-        
-        let object = UIImageView(frame: CGRect(x: bushX, y: -bush.height, width: bush.width, height: bush.height))
-        object.contentMode = .scaleAspectFit
-        object.isUserInteractionEnabled = false
-        let objectImage = UIImage(named: "bush")
-        object.image = objectImage
-        
-        viewController.view.addSubview(object)
-        cachedBushes[side]?.append(object)
-        
-        return object
-    }
-    
-    private func generateRandomSideItem(side: Side) -> UIImageView? {
-        let randomItem = Int.random(in: 0...2)
-        
-        if (randomItem == 0) {
-            return generateBush(side: side)
+        if (randomItem == 0 || randomItem == 1) {
+            return generateSideObject(object: .bush, side: side)
+        } else if (randomItem == 2 || randomItem == 3 || randomItem == 4) {
+            return generateSideObject(object: .tree, side: side)
         } else {
-            return generateTree(side: side)
+            return generateSideObject(object: .roadSign, side: side)
         }
     }
-
-    func generateCivilCar(lane: Lane) -> UIImageView? {
-        if let createdCivilCar = cachedCivilCars[lane]?.first(where: { imageView in
-            return imageView.isHidden
-        })
-        {
-            createdCivilCar.isHidden = false
-            return createdCivilCar
+    
+    private func generateSideObject(object: SideObject, side: Side) -> UIImageView? {
+        if let cachedObject = cachedSideObject(object: object, side: side) {
+            return cachedObject
+        }
+        
+        var objectSize: CGSize?
+        
+        switch object {
+        case .tree:
+            objectSize = treeSize
+        case .bush:
+            objectSize = bushSize
+        case .roadSign:
+            objectSize = roadSignSize
+        }
+        
+        guard let size = objectSize else {
+            return nil
+        }
+        
+        guard let sideArea = sideAreaSize else {
+            return nil
+        }
+        
+        guard let view = viewSize else {
+            return nil
+        }
+        
+        guard let startY = startYOfSideObjects else {
+            return nil
+        }
+        
+        guard let viewController = gameViewController else {
+            return nil
+        }
+        
+        var objectX: Double = 0
+        
+        switch side {
+        case .left:
+            objectX = (sideArea.width - size.width) / 2.0
+        case .right:
+            objectX = view.width - ((sideArea.width + size.width) / 2.0)
+        }
+        
+        let imageView = UIImageView(frame: CGRect(x: objectX, y: startY, width: size.width, height: size.height))
+        imageView.contentMode = .scaleAspectFit
+        imageView.isUserInteractionEnabled = false
+        let objectImage = UIImage(named: sideObjectImageName(object: object))
+        imageView.image = objectImage
+        
+        viewController.view.addSubview(imageView)
+        
+        switch object {
+        case .tree:
+            cachedTrees[side]?.append(imageView)
+        case .bush:
+            cachedBushes[side]?.append(imageView)
+        case .roadSign:
+            cachedRoadSignes[side]?.append(imageView)
+        }
+        
+        return imageView
+    }
+    
+    private func generateTrafficObject(object: TrafficObject, lane: Lane) -> UIImageView? {
+        if let cachedObject = cachedTrafficObject(object: object, lane: lane) {
+            return cachedObject
+        }
+        
+        var objectSize: CGSize?
+        
+        switch object {
+        case .car:
+            objectSize = carSize
+        case .truck:
+            objectSize = truckSize
+        }
+        
+        guard let size = objectSize else {
+            return nil
         }
         
         guard let sideArea = sideAreaSize else {
@@ -514,89 +506,113 @@ class SpawnerManager {
             return nil
         }
         
+        guard let startY = startYOfTrafficObjects else {
+            return nil
+        }
+        
         guard let viewController = gameViewController else {
             return nil
         }
         
-        guard let car = carSize else {
-            return nil
-        }
-        
-        var carX: Double = 0
+        var objectX: Double = 0
 
         switch lane {
         case .left:
-            carX = sideArea.width + (roadLane.width - car.width) / 2.0
+            objectX = sideArea.width + (roadLane.width - size.width) / 2.0
         case .middle:
-            carX = sideArea.width + roadLane.width + (roadLane.width - car.width) / 2.0
+            objectX = sideArea.width + roadLane.width + (roadLane.width - size.width) / 2.0
         case .right:
-            carX = sideArea.width + 2 * roadLane.width + (roadLane.width - car.width) / 2.0
+            objectX = sideArea.width + 2 * roadLane.width + (roadLane.width - size.width) / 2.0
         }
 
-        let civilCar = UIImageView(frame: CGRect(x: carX, y: -car.height, width: car.width, height: car.height))
-        civilCar.transform = CGAffineTransform(rotationAngle: .pi)
-        civilCar.contentMode = .scaleAspectFit
-        civilCar.isUserInteractionEnabled = false
-        let civilCarImage = UIImage(named: "enemy_car")
-        civilCar.image = civilCarImage
-        civilCar.layer.zPosition = 9
-        civilCar.applyShadow(offset: CGSize(width: -4, height: -3), radius: 7)
-
-        viewController.view.addSubview(civilCar)
-        cachedCivilCars[lane]?.append(civilCar)
-
-        return civilCar
+        let imageView = UIImageView(frame: CGRect(x: objectX, y: startY, width: size.width, height: size.height))
+        imageView.transform = CGAffineTransform(rotationAngle: .pi)
+        imageView.contentMode = .scaleAspectFit
+        imageView.isUserInteractionEnabled = false
+        let objectImage = UIImage(named: trafficObjectImageName(object: object))
+        imageView.image = objectImage
+        imageView.layer.zPosition = 9
+        imageView.applyShadow(offset: CGSize(width: -4, height: -3), radius: object == .truck ? 10 : 7)
+        
+        viewController.view.addSubview(imageView)
+        
+        switch object {
+        case .car:
+            cachedCivilCars[lane]?.append(imageView)
+        case .truck:
+            cachedTrucks[lane]?.append(imageView)
+        }
+        
+        return imageView
     }
-
-    func generateTruck(lane: Lane) -> UIImageView? {
-        if let createdTruck = cachedTrucks[lane]?.first(where: { imageView in
+    
+    private func sideObjectImageName(object: SideObject) -> String {
+        switch object {
+        case .tree:
+            return "tree"
+        case .bush:
+            return "bush"
+        case .roadSign:
+            return "road_sign_\(Int.random(in: 1...2))"
+        }
+    }
+    
+    private func trafficObjectImageName(object: TrafficObject) -> String {
+        switch object {
+        case .car:
+            return "enemy_car"
+        case .truck:
+            return "truck"
+        }
+    }
+    
+    private func cachedSideObject(object: SideObject, side: Side) -> UIImageView? {
+        var cachedObjects: [Side: [UIImageView]]
+        
+        switch object {
+        case .tree:
+            cachedObjects = cachedTrees
+//            print("TREES: L-\(cachedTrees[.left]?.count ?? 0) R-\(cachedTrees[.right]?.count ?? 0)")
+        case .bush:
+            cachedObjects = cachedBushes
+//            print("BUSHES: L-\(cachedBushes[.left]?.count ?? 0) R-\(cachedBushes[.right]?.count ?? 0)")
+        case .roadSign:
+            cachedObjects = cachedRoadSignes
+//            print("RSIGNS: L-\(cachedRoadSignes[.left]?.count ?? 0) R-\(cachedRoadSignes[.right]?.count ?? 0)")
+        }
+        
+        if let cachedObject = cachedObjects[side]?.first(where: { imageView in
             return imageView.isHidden
         })
         {
-            createdTruck.isHidden = false
-            return createdTruck
+            cachedObject.isHidden = false
+            return cachedObject
         }
         
-        guard let sideArea = sideAreaSize else {
-            return nil
+        return nil
+    }
+    
+    private func cachedTrafficObject(object: TrafficObject, lane: Lane) -> UIImageView? {
+        var cachedObjects: [Lane: [UIImageView]]
+        
+        switch object {
+        case .car:
+            cachedObjects = cachedCivilCars
+//            print("CARS: L-\(cachedCivilCars[.left]?.count ?? 0) M-\(cachedCivilCars[.middle]?.count ?? 0) R-\(cachedCivilCars[.right]?.count ?? 0)")
+        case .truck:
+            cachedObjects = cachedTrucks
+//            print("TRUCKS: L-\(cachedTrucks[.left]?.count ?? 0) M-\(cachedTrucks[.middle]?.count ?? 0) R-\(cachedTrucks[.right]?.count ?? 0)")
         }
         
-        guard let roadLane = roadLaneSize else {
-            return nil
+        if let cachedObject = cachedObjects[lane]?.first(where: { imageView in
+            return imageView.isHidden
+        })
+        {
+            cachedObject.isHidden = false
+            return cachedObject
         }
         
-        guard let viewController = gameViewController else {
-            return nil
-        }
-        
-        guard let truck = truckSize else {
-            return nil
-        }
-        
-        var truckX: Double = 0
-
-        switch lane {
-        case .left:
-            truckX = sideArea.width + (roadLane.width - truck.width) / 2.0
-        case .middle:
-            truckX = sideArea.width + roadLane.width + (roadLane.width - truck.width) / 2.0
-        case .right:
-            truckX = sideArea.width + 2 * roadLane.width + (roadLane.width - truck.width) / 2.0
-        }
-
-        let truckObject = UIImageView(frame: CGRect(x: truckX, y: -truck.height, width: truck.width, height: truck.height))
-        truckObject.transform = CGAffineTransform(rotationAngle: .pi)
-        truckObject.contentMode = .scaleAspectFit
-        truckObject.isUserInteractionEnabled = false
-        let truckImage = UIImage(named: "truck")
-        truckObject.image = truckImage
-        truckObject.layer.zPosition = 9
-        truckObject.applyShadow(offset: CGSize(width: -4, height: -3), radius: 10)
-        
-        viewController.view.addSubview(truckObject)
-        cachedTrucks[lane]?.append(truckObject)
-
-        return truckObject
+        return nil
     }
 
     func generateRandomVehicle() -> UIImageView? {
@@ -611,7 +627,7 @@ class SpawnerManager {
 
         let randomVehicle = Int.random(in: 0...2)
 
-        return randomVehicle == 2 ? generateTruck(lane: lane) : generateCivilCar(lane: lane)
+        return generateTrafficObject(object: randomVehicle == 2 ? .truck : .car, lane: lane)
     }
     
     private func cofigureObjectSizes(viewSize: CGSize) {
@@ -631,6 +647,9 @@ class SpawnerManager {
         let truckHeight = truckWidth * 11.0 / 4.0
         truckSize = CGSize(width: truckWidth, height: truckHeight)
         
+        startYOfTrafficObjects = -max(carHeight, truckHeight)
+        endYOfTrafficObjects = viewSize.height + max(carHeight, truckHeight)
+        
         let treeWidth = sideAreaWidth * 0.6
         let treeHeight = treeWidth * 9 / 5
         treeSize = CGSize(width: treeWidth, height: treeHeight)
@@ -638,6 +657,13 @@ class SpawnerManager {
         let bushWidth = sideAreaWidth * 0.4
         let bushHeight = bushWidth * 5 / 6
         bushSize = CGSize(width: bushWidth, height: bushHeight)
+        
+        let roadSignWidth = bushWidth
+        let roadSignHeight = roadSignWidth * 23.0 / 12.0
+        roadSignSize = CGSize(width: roadSignWidth, height: roadSignHeight)
+        
+        startYOfSideObjects = -max(treeHeight, bushHeight, roadSignHeight)
+        endYOfSideObjects = viewSize.height + max(treeHeight, bushHeight, roadSignHeight)
         
         let separateLineWidth = carWidth * 0.15
         let separateLineHeight = separateLineWidth * 6
