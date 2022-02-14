@@ -13,18 +13,20 @@ class GameManager {
     
     private let rotationAngle: CGFloat = 15 * .pi / 180
     
-    private let screenSize: CGSize
-    private let sideWidth: CGFloat
-    private let roadLaneWidth: CGFloat
-    
-    init() {
-        screenSize = UIScreen.main.bounds.size
-        sideWidth = screenSize.width * 0.15
-        roadLaneWidth = (screenSize.width - 2 * sideWidth) / 3
-    }
-    
     func movePlayersCar(move: Move) {
         guard let car = SpawnerManager.shared.playersCar else {
+            return
+        }
+        
+        guard let roadLaneSize = SpawnerManager.shared.roadLaneSize else {
+            return
+        }
+        
+        guard let sideAreaSize = SpawnerManager.shared.sideAreaSize else {
+            return
+        }
+        
+        guard let viewSize = SpawnerManager.shared.viewSize else {
             return
         }
         
@@ -34,12 +36,12 @@ class GameManager {
         switch move {
         case .left:
             carRotationAngle = -rotationAngle
-            destinationPoint = CGPoint(x: car.center.x - roadLaneWidth, y: car.center.y)
+            destinationPoint = CGPoint(x: car.center.x - roadLaneSize.width, y: car.center.y)
         case .right:
-            destinationPoint = CGPoint(x: car.center.x + roadLaneWidth, y: car.center.y)
+            destinationPoint = CGPoint(x: car.center.x + roadLaneSize.width, y: car.center.y)
         }
         
-        if destinationPoint.x > sideWidth && destinationPoint.x < screenSize.width - sideWidth {
+        if destinationPoint.x > sideAreaSize.width && destinationPoint.x < viewSize.width - sideAreaSize.width {
             car.transform = CGAffineTransform(rotationAngle: carRotationAngle)
             
             UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) {

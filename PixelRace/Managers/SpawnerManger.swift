@@ -20,9 +20,9 @@ class SpawnerManager {
     private let sideSeparatorColor = UIColor(red: 120 / 255.0, green: 120 / 255.0, blue: 120 / 255.0, alpha: 1.0)
     private let separateLineColor = UIColor.white
     
-    private var viewSize: CGSize?
-    private var sideAreaSize: CGSize?
-    private var roadLaneSize: CGSize?
+    var viewSize: CGSize?
+    var sideAreaSize: CGSize?
+    var roadLaneSize: CGSize?
     private var carSize: CGSize?
     private var truckSize: CGSize?
     private var treeSize: CGSize?
@@ -35,6 +35,7 @@ class SpawnerManager {
     private var startYOfTrafficObjects: CGFloat?
     private var endYOfTrafficObjects: CGFloat?
 
+    // need to move in GameManager
     private var laneSeparatorsTimer: Timer?
     private var leftSideItemsTimer: Timer?
     private var rightSideItemsTimer: Timer?
