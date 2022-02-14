@@ -558,7 +558,7 @@ class SpawnerManager {
     private func trafficObjectImageName(object: TrafficObject) -> String {
         switch object {
         case .car:
-            return "enemy_car"
+            return "civil_car_\(Int.random(in: 1...3))"
         case .truck:
             return "truck"
         }

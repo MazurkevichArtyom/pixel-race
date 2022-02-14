@@ -5,12 +5,12 @@
       "scale" : "1x"
     },
     {
-      "filename" : "enemy_car@2x.png",
+      "filename" : "civil_car_3@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "enemy_car@3x.png",
+      "filename" : "civil_car_3@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
