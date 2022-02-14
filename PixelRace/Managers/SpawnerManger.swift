@@ -20,6 +20,8 @@ class SpawnerManager {
     private let sideSeparatorColor = UIColor(red: 120 / 255.0, green: 120 / 255.0, blue: 120 / 255.0, alpha: 1.0)
     private let separateLineColor = UIColor.white
     
+    private let staticObjectDuration = 2.5
+    
     var viewSize: CGSize?
     var sideAreaSize: CGSize?
     var roadLaneSize: CGSize?
@@ -157,10 +159,6 @@ class SpawnerManager {
     }
     
     @objc private func genereateLaneSeparators() {
-        guard let viewController = gameViewController else {
-            return
-        }
-        
         guard let leftLaneSeparator = generateLaneSeparator(side: .left) else {
             return
         }
@@ -169,12 +167,16 @@ class SpawnerManager {
             return
         }
         
+        guard let endY = endYOfSideObjects else {
+            return
+        }
+        
         let leftLaneInitialCenter = leftLaneSeparator.center
         let rightLaneInitialCenter = rightLaneSeparator.center
         
-        UIView.animate(withDuration: 2.5, delay: 0, options: .curveLinear) {
-            leftLaneSeparator.center = CGPoint(x: leftLaneSeparator.center.x , y: viewController.view.frame.height + leftLaneSeparator.frame.height)
-            rightLaneSeparator.center = CGPoint(x: rightLaneSeparator.center.x , y: viewController.view.frame.height + rightLaneSeparator.frame.height)
+        UIView.animate(withDuration: staticObjectDuration, delay: 0, options: .curveLinear) {
+            leftLaneSeparator.center = CGPoint(x: leftLaneSeparator.center.x , y: endY)
+            rightLaneSeparator.center = CGPoint(x: rightLaneSeparator.center.x , y: endY)
         } completion: { finish in
             leftLaneSeparator.center = leftLaneInitialCenter
             rightLaneSeparator.center = rightLaneInitialCenter
@@ -364,6 +366,10 @@ class SpawnerManager {
             return nil
         }
         
+        guard let startY = startYOfSideObjects else {
+            return nil
+        }
+        
         var lineX: Double = 0
         
         switch side {
@@ -373,7 +379,7 @@ class SpawnerManager {
             lineX = sideArea.width + 2 * roadLane.width - separateLine.width / 2.0
         }
         
-        let laneSeparator = UIView(frame: CGRect(x: lineX, y: -separateLine.height, width: separateLine.width, height: separateLine.height))
+        let laneSeparator = UIView(frame: CGRect(x: lineX, y: startY, width: separateLine.width, height: separateLine.height))
         laneSeparator.backgroundColor = separateLineColor
         laneSeparator.isUserInteractionEnabled = false
         
@@ -394,7 +400,7 @@ class SpawnerManager {
         
         let sideObjectInitialCenter = sideObject.center
         
-        UIView.animate(withDuration: 2.5, delay: 0, options: .curveLinear) {
+        UIView.animate(withDuration: staticObjectDuration, delay: 0, options: .curveLinear) {
             sideObject.center = CGPoint(x: sideObject.center.x, y: endY)
         } completion: { finish in
             sideObject.center = sideObjectInitialCenter
@@ -660,11 +666,11 @@ class SpawnerManager {
         let roadSignHeight = roadSignWidth * 23.0 / 12.0
         roadSignSize = CGSize(width: roadSignWidth, height: roadSignHeight)
         
-        startYOfSideObjects = -max(treeHeight, bushHeight, roadSignHeight)
-        endYOfSideObjects = viewSize.height + max(treeHeight, bushHeight, roadSignHeight)
-        
         let separateLineWidth = carWidth * 0.15
         let separateLineHeight = separateLineWidth * 6
         separateLineSize = CGSize(width: separateLineWidth, height: separateLineHeight)
+        
+        startYOfSideObjects = -max(treeHeight, bushHeight, roadSignHeight, separateLineHeight)
+        endYOfSideObjects = viewSize.height + max(treeHeight, bushHeight, roadSignHeight, separateLineHeight)
     }
 }
