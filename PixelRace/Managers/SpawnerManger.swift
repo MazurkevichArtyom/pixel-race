@@ -15,9 +15,9 @@ class SpawnerManager {
 
     private var gameViewController: UIViewController?
     
-    private let sideColor = UIColor(red: 118 / 255.0, green: 172 / 255.0, blue: 31 / 255.0, alpha: 1.0)
-    private let laneColor = UIColor(red: 160 / 255.0, green: 160 / 255.0, blue: 160 / 255.0, alpha: 1.0)
-    private let sideSeparatorColor = UIColor(red: 120 / 255.0, green: 120 / 255.0, blue: 120 / 255.0, alpha: 1.0)
+    private let sideColor = UIColor(hex: 0x76AC1F)
+    private let laneColor = UIColor(hex: 0xA0A0A0)
+    private let sideSeparatorColor = UIColor(hex: 0x787878)
     private let separateLineColor = UIColor.white
     
     var viewSize: CGSize?
