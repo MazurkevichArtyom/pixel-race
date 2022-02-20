@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		99191F7927C2FEA800519E00 /* PublicPixel.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 99191F7827C2FEA800519E00 /* PublicPixel.ttf */; };
 		9921893827B1C45F00E12EFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9921893727B1C45F00E12EFF /* AppDelegate.swift */; };
 		9921893A27B1C45F00E12EFF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9921893927B1C45F00E12EFF /* SceneDelegate.swift */; };
 		9921893C27B1C45F00E12EFF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9921893B27B1C45F00E12EFF /* ViewController.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		99191F7827C2FEA800519E00 /* PublicPixel.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PublicPixel.ttf; sourceTree = "<group>"; };
 		9921893427B1C45F00E12EFF /* PixelRace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PixelRace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9921893727B1C45F00E12EFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9921893927B1C45F00E12EFF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +57,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		99191F7727C2FE3800519E00 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				99191F7827C2FEA800519E00 /* PublicPixel.ttf */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		9921892B27B1C45F00E12EFF = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +84,7 @@
 		9921893627B1C45F00E12EFF /* PixelRace */ = {
 			isa = PBXGroup;
 			children = (
+				99191F7727C2FE3800519E00 /* Resources */,
 				995C282927B47313004CF564 /* Enums */,
 				995C282627B46A63004CF564 /* Managers */,
 				9921894B27B1C46B00E12EFF /* GameViewController */,
@@ -176,6 +187,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99191F7927C2FEA800519E00 /* PublicPixel.ttf in Resources */,
 				9921894427B1C45F00E12EFF /* LaunchScreen.storyboard in Resources */,
 				9921894127B1C45F00E12EFF /* Assets.xcassets in Resources */,
 				9921893F27B1C45F00E12EFF /* Main.storyboard in Resources */,
@@ -355,7 +367,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -386,7 +398,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
