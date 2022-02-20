@@ -544,6 +544,7 @@ class SpawnerManager {
         case .car:
             cachedCivilCars[lane]?.append(imageView)
         case .truck:
+            imageView.accessibilityIdentifier = "truck"
             cachedTrucks[lane]?.append(imageView)
         }
         
