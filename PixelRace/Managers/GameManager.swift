@@ -9,24 +9,52 @@ import Foundation
 import UIKit
 
 class GameManager {
-    static let shared = GameManager()
+    private let viewController: UIViewController
+    private let spawnerManager: SpawnerManager
+    private let collisionManager: CollisionManager
     
     private let rotationAngle: CGFloat = 15 * .pi / 180
     
+    init(viewController: UIViewController) {
+        self.viewController = viewController
+        collisionManager = CollisionManager()
+        spawnerManager = SpawnerManager(collisionManager: collisionManager)
+    }
+    
+    func start() {
+        spawnerManager.startLaneSeparatorsSpawning()
+        spawnerManager.startSideObjectsSpawning()
+        spawnerManager.startTrafficFlowSpawning()
+        collisionManager.startObserving(playersCar: spawnerManager.playersCar) {
+            self.spawnerManager.invalidate()
+            self.collisionManager.stopObserving()
+            self.viewController.navigationController?.popViewController(animated: false)
+        }
+    }
+    
+    func stop() {
+        
+    }
+    
+    func setupGameScene() {
+        spawnerManager.setupViewController(viewController: self.viewController)
+        spawnerManager.setupRacingLocation()
+    }
+    
     func movePlayersCar(move: Move) {
-        guard let car = SpawnerManager.shared.playersCar else {
+        guard let car = spawnerManager.playersCar else {
             return
         }
         
-        guard let roadLaneSize = SpawnerManager.shared.roadLaneSize else {
+        guard let roadLaneSize = spawnerManager.roadLaneSize else {
             return
         }
         
-        guard let sideAreaSize = SpawnerManager.shared.sideAreaSize else {
+        guard let sideAreaSize = spawnerManager.sideAreaSize else {
             return
         }
         
-        guard let viewSize = SpawnerManager.shared.viewSize else {
+        guard let viewSize = spawnerManager.viewSize else {
             return
         }
         
@@ -50,6 +78,6 @@ class GameManager {
                 car.transform = CGAffineTransform(rotationAngle: 0)
             }
         }
-
+        
     }
 }

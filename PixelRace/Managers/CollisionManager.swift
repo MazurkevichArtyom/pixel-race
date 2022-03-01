@@ -9,19 +9,20 @@ import Foundation
 import UIKit
 
 class CollisionManager {
-    static let shared = CollisionManager()
-    
+    private var playersCar: UIImageView?
     private var collisionTimer: Timer?
     private var callBack: () -> Void = { }
     
     private var observables: [UIImageView] = [UIImageView]()
     
-    func startObserving(collisionCallBack: @escaping () -> Void) {
+    func startObserving(playersCar: UIImageView?, collisionCallBack: @escaping () -> Void) {
+        self.playersCar = playersCar
         callBack = collisionCallBack
         collisionTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(checkCollisions), userInfo: nil, repeats: true)
     }
     
     func stopObserving() {
+        playersCar = nil
         collisionTimer?.invalidate()
         observables.removeAll()
     }
@@ -37,17 +38,17 @@ class CollisionManager {
     }
     
     @objc private func checkCollisions() {
-        guard let myCar = SpawnerManager.shared.playersCar else {
+        guard let playersCar = self.playersCar else {
             return
         }
         
-        guard let myCarFrame = myCar.layer.presentation()?.frame else {
+        guard let playersCarFrame = playersCar.layer.presentation()?.frame else {
             return
         }
         
         for observable in observables {
             if let oFrame = observable.layer.presentation()?.frame {
-                if (myCarFrame.intersects(oFrame)) {
+                if (playersCarFrame.intersects(oFrame)) {
                     callBack()
                     break
                 }

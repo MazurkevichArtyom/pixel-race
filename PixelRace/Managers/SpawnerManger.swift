@@ -9,10 +9,9 @@ import Foundation
 import UIKit
 
 class SpawnerManager {
-    static let shared = SpawnerManager()
-    
     var playersCar: UIImageView?
 
+    private var collisionManager: CollisionManager
     private var gameViewController: UIViewController?
     
     private let sideColor = UIColor(red: 118 / 255.0, green: 172 / 255.0, blue: 31 / 255.0, alpha: 1.0)
@@ -49,6 +48,10 @@ class SpawnerManager {
     private var cachedBushes: [Side: [UIImageView]] = [.left: [UIImageView](), .right :[UIImageView]()]
     private var cachedRoadSignes: [Side: [UIImageView]] = [.left: [UIImageView](), .right :[UIImageView]()]
     private var cachedLaneSeparators: [Side: [UIView]] = [.left: [UIView](), .right :[UIView]()]
+    
+    init(collisionManager: CollisionManager) {
+        self.collisionManager = collisionManager
+    }
     
     func setupViewController(viewController: UIViewController) {
         gameViewController = viewController
@@ -206,7 +209,7 @@ class SpawnerManager {
         
         let enemysCarInitialCenter = vehicle.center
         
-        CollisionManager.shared.addObservableObject(observable: vehicle)
+        collisionManager.addObservableObject(observable: vehicle)
         let duration = vehicle.accessibilityIdentifier == "truck" ? 2.3 : 2.0
         
         UIView.animate(withDuration: duration, delay: 0, options: .curveLinear) {
@@ -214,7 +217,7 @@ class SpawnerManager {
         } completion: { finish in
             vehicle.center = enemysCarInitialCenter
             vehicle.isHidden = true
-            CollisionManager.shared.removeObservableObject(observable: vehicle)
+            self.collisionManager.removeObservableObject(observable: vehicle)
         }
         
         restartTrafficFlowTimer()
@@ -329,7 +332,7 @@ class SpawnerManager {
             return
         }
         
-        let myCar = UIImageView(frame: CGRect(x: sideArea.width + roadLane.width + (roadLane.width - car.width) / 2.0 , y: view.height - 120.0, width: car.width, height: car.height))
+        let myCar = UIImageView(frame: CGRect(x: sideArea.width + roadLane.width + (roadLane.width - car.width) / 2.0 , y: view.height - view.height * 0.05 - car.height, width: car.width, height: car.height))
         myCar.contentMode = .scaleAspectFit
         myCar.isUserInteractionEnabled = false
         let image = UIImage(named: "player_car")
