@@ -11,8 +11,6 @@ class GameViewController: UIViewController {
     private var debugTimer: Timer?
     private var gameManager: GameManager?
     
-    // GameManager init(VC) - SpawnerManager and CollisionManager
-    // VC should know only about GameManager
     // Need to move all animations to GameManager
     // Need to create GameObject with speed proprty
     
@@ -51,6 +49,14 @@ class GameViewController: UIViewController {
         debugTimer?.invalidate()
     }
     
+    @objc private func onSwipe(gesture: UISwipeGestureRecognizer) {
+        movePlayersCar(direction: gesture.direction)
+    }
+    
+    @objc private func debugInfo() {
+    }
+    
+    
     private func setupControlGestures() {
         let leftSwipeGR = UISwipeGestureRecognizer(target: self, action: #selector(onSwipe))
         leftSwipeGR.direction = .left
@@ -73,13 +79,6 @@ class GameViewController: UIViewController {
             gameManager.movePlayersCar(move: .right)
         default: break
         }
-    }
-    
-    @objc private func onSwipe(gesture: UISwipeGestureRecognizer) {
-        movePlayersCar(direction: gesture.direction)
-    }
-    
-    @objc private func debugInfo() {
     }
     /*
      // MARK: - Navigation

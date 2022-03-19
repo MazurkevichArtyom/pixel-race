@@ -39,21 +39,12 @@ class GameManager {
     }
     
     func movePlayersCar(move: Move) {
-        guard let car = spawnerManager.playersCar else {
-            return
-        }
-        
-        guard let roadLaneSize = spawnerManager.roadLaneSize else {
-            return
-        }
-        
-        guard let sideAreaSize = spawnerManager.sideAreaSize else {
-            return
-        }
-        
-        guard let viewSize = spawnerManager.viewSize else {
-            return
-        }
+        guard let car = spawnerManager.playersCar,
+              let roadLaneSize = spawnerManager.roadLaneSize,
+              let sideAreaSize = spawnerManager.sideAreaSize,
+              let viewSize = spawnerManager.viewSize else {
+                  return
+              }
         
         var destinationPoint = car.center
         var carRotationAngle = rotationAngle

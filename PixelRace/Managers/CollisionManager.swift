@@ -38,13 +38,10 @@ class CollisionManager {
     }
     
     @objc private func checkCollisions() {
-        guard let playersCar = self.playersCar else {
-            return
-        }
-        
-        guard let playersCarFrame = playersCar.layer.presentation()?.frame else {
-            return
-        }
+        guard let playersCar = self.playersCar,
+              let playersCarFrame = playersCar.layer.presentation()?.frame else {
+                  return
+              }
         
         for observable in observables {
             if let oFrame = observable.layer.presentation()?.frame {
