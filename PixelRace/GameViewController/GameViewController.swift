@@ -12,7 +12,6 @@ class GameViewController: UIViewController {
     private var gameManager: GameManager?
     
     // GameManager init(VC) - SpawnerManager and CollisionManager
-    // Don't need singleton
     // VC should know only about GameManager
     // Need to move all animations to GameManager
     // Need to create GameObject with speed proprty

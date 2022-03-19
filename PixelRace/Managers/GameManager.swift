@@ -17,14 +17,12 @@ class GameManager {
     
     init(viewController: UIViewController) {
         self.viewController = viewController
-        collisionManager = CollisionManager()
-        spawnerManager = SpawnerManager(collisionManager: collisionManager)
+        self.collisionManager = CollisionManager()
+        self.spawnerManager = SpawnerManager(collisionManager: collisionManager, viewController: viewController)
     }
     
     func start() {
-        spawnerManager.startLaneSeparatorsSpawning()
-        spawnerManager.startSideObjectsSpawning()
-        spawnerManager.startTrafficFlowSpawning()
+        spawnerManager.startGameObjectSpawning()
         collisionManager.startObserving(playersCar: spawnerManager.playersCar) {
             self.spawnerManager.invalidate()
             self.collisionManager.stopObserving()
@@ -37,7 +35,6 @@ class GameManager {
     }
     
     func setupGameScene() {
-        spawnerManager.setupViewController(viewController: self.viewController)
         spawnerManager.setupRacingLocation()
     }
     

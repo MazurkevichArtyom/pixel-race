@@ -11,8 +11,8 @@ import UIKit
 class SpawnerManager {
     var playersCar: UIImageView?
 
-    private var collisionManager: CollisionManager
-    private var gameViewController: UIViewController?
+    private let collisionManager: CollisionManager
+    private let gameViewController: UIViewController
     
     private let sideColor = UIColor(red: 118 / 255.0, green: 172 / 255.0, blue: 31 / 255.0, alpha: 1.0)
     private let laneColor = UIColor(red: 160 / 255.0, green: 160 / 255.0, blue: 160 / 255.0, alpha: 1.0)
@@ -49,27 +49,24 @@ class SpawnerManager {
     private var cachedRoadSignes: [Side: [UIImageView]] = [.left: [UIImageView](), .right :[UIImageView]()]
     private var cachedLaneSeparators: [Side: [UIView]] = [.left: [UIView](), .right :[UIView]()]
     
-    init(collisionManager: CollisionManager) {
+    init(collisionManager: CollisionManager, viewController: UIViewController) {
         self.collisionManager = collisionManager
-    }
-    
-    func setupViewController(viewController: UIViewController) {
-        gameViewController = viewController
-        cofigureObjectSizes(viewSize: viewController.view.frame.size)
+        self.gameViewController = viewController
+        self.cofigureObjectSizes(viewSize: gameViewController.view.frame.size)
     }
     
     func setupRacingLocation() {
-        generateSide(side: .left)
-        generateSide(side: .right)
+        setupSide(side: .left)
+        setupSide(side: .right)
         
-        generateLane(type: .left)
-        generateLane(type: .middle)
-        generateLane(type: .right)
+        setupLane(type: .left)
+        setupLane(type: .middle)
+        setupLane(type: .right)
         
-        generateSideSeparator(side: .left)
-        generateSideSeparator(side: .right)
+        setupSideSeparator(side: .left)
+        setupSideSeparator(side: .right)
         
-        generatePlyersCar()
+        setupPlyersCar()
     }
     
     func invalidate() {
@@ -78,24 +75,27 @@ class SpawnerManager {
         rightSideItemsTimer?.invalidate()
         trafficFlowTimer?.invalidate()
         
-        guard let viewController = gameViewController else {
-            return
-        }
-        viewController.view.layer.removeAllAnimations()
+        gameViewController.view.layer.removeAllAnimations()
         
         clearAllCachedData()
     }
     
-    func startLaneSeparatorsSpawning() {
+    func startGameObjectSpawning() {
+        startLaneSeparatorsSpawning()
+        startSideObjectsSpawning()
+        startTrafficFlowSpawning()
+    }
+    
+    private func startLaneSeparatorsSpawning() {
         restartLaneSeparatorsTimer()
     }
     
-    func startSideObjectsSpawning() {
+    private func startSideObjectsSpawning() {
         restartLeftSideItemsTimer()
         restartRightSideItemsTimer()
     }
     
-    func startTrafficFlowSpawning() {
+    private func startTrafficFlowSpawning() {
         restartTrafficFlowTimer()
     }
     
@@ -162,15 +162,10 @@ class SpawnerManager {
     }
     
     @objc private func genereateLaneSeparators() {
-        guard let leftLaneSeparator = generateLaneSeparator(side: .left) else {
-            return
-        }
         
-        guard let rightLaneSeparator = generateLaneSeparator(side: .right) else {
-            return
-        }
-        
-        guard let endY = endYOfSideObjects else {
+        guard let leftLaneSeparator = generateLaneSeparator(side: .left),
+              let rightLaneSeparator = generateLaneSeparator(side: .right),
+              let endY = endYOfSideObjects else {
             return
         }
         
@@ -199,11 +194,8 @@ class SpawnerManager {
     }
     
     @objc private func generateEnemysCars() {
-        guard let vehicle = generateRandomVehicle() else {
-            return
-        }
-        
-        guard let endY = endYOfTrafficObjects else {
+        guard let vehicle = generateRandomVehicle(),
+              let endY = endYOfTrafficObjects else {
             return
         }
         
@@ -223,16 +215,24 @@ class SpawnerManager {
         restartTrafficFlowTimer()
     }
     
-    private func generateSide(side: Side) {
-        guard let sideArea = sideAreaSize else {
-            return
+    func generateRandomVehicle() -> UIImageView? {
+        var lane = Lane.right
+        let randomItem = Int.random(in: 0...2)
+
+        if randomItem == 0 {
+            lane = .left
+        } else if randomItem == 1 {
+            lane = .middle
         }
-        
-        guard let view = viewSize else {
-            return
-        }
-        
-        guard let viewController = gameViewController else {
+
+        let randomVehicle = Int.random(in: 0...2)
+
+        return generateTrafficObject(object: randomVehicle == 2 ? .truck : .car, lane: lane)
+    }
+    
+    private func setupSide(side: Side) {
+        guard let sideArea = sideAreaSize,
+              let view = viewSize else {
             return
         }
         
@@ -240,19 +240,12 @@ class SpawnerManager {
         side.backgroundColor = sideColor
         side.isUserInteractionEnabled = false
         
-        viewController.view.addSubview(side)
+        gameViewController.view.addSubview(side)
     }
     
-    private func generateLane(type: Lane) {
-        guard let roadLane = roadLaneSize else {
-            return
-        }
-        
-        guard let sideArea = sideAreaSize else {
-            return
-        }
-        
-        guard let viewController = gameViewController else {
+    private func setupLane(type: Lane) {
+        guard let roadLane = roadLaneSize,
+              let sideArea = sideAreaSize else {
             return
         }
         
@@ -271,27 +264,14 @@ class SpawnerManager {
         lane.backgroundColor = laneColor
         lane.isUserInteractionEnabled = false
         
-        viewController.view.addSubview(lane)
+        gameViewController.view.addSubview(lane)
     }
     
-    private func generateSideSeparator(side: Side) {
-        guard let sideArea = sideAreaSize else {
-            return
-        }
-        
-        guard let roadLane = roadLaneSize else {
-            return
-        }
-        
-        guard let separateLine = separateLineSize else {
-            return
-        }
-        
-        guard let view = viewSize else {
-            return
-        }
-        
-        guard let viewController = gameViewController else {
+    private func setupSideSeparator(side: Side) {
+        guard let sideArea = sideAreaSize,
+              let roadLane = roadLaneSize,
+              let separateLine = separateLineSize,
+              let view = viewSize else {
             return
         }
         
@@ -303,32 +283,19 @@ class SpawnerManager {
         case .right:
             lineX = sideArea.width + 3 * roadLane.width - separateLine.width / 2.0
         }
-
+        
         let line = UIView(frame: CGRect(x: lineX, y: 0, width: separateLine.width, height: view.height))
         line.backgroundColor = sideSeparatorColor
         line.isUserInteractionEnabled = false
 
-        viewController.view.addSubview(line)
+        gameViewController.view.addSubview(line)
     }
 
-    private func generatePlyersCar() {
-        guard let sideArea = sideAreaSize else {
-            return
-        }
-        
-        guard let roadLane = roadLaneSize else {
-            return
-        }
-        
-        guard let car = carSize else {
-            return
-        }
-        
-        guard let view = viewSize else {
-            return
-        }
-        
-        guard let viewController = gameViewController else {
+    private func setupPlyersCar() {
+        guard let sideArea = sideAreaSize,
+              let roadLane = roadLaneSize,
+              let view = viewSize,
+              let car = carSize else {
             return
         }
         
@@ -341,7 +308,7 @@ class SpawnerManager {
 
         playersCar = myCar
 
-        viewController.view.addSubview(myCar)
+        gameViewController.view.addSubview(myCar)
     }
     
     private func generateLaneSeparator(side: Side) -> UIView? {
@@ -353,23 +320,10 @@ class SpawnerManager {
             return createdSeparator
         }
         
-        guard let sideArea = sideAreaSize else {
-            return nil
-        }
-        
-        guard let roadLane = roadLaneSize else {
-            return nil
-        }
-        
-        guard let separateLine = separateLineSize else {
-            return nil
-        }
-        
-        guard let viewController = gameViewController else {
-            return nil
-        }
-        
-        guard let startY = startYOfSideObjects else {
+        guard let sideArea = sideAreaSize,
+              let roadLane = roadLaneSize,
+              let separateLine = separateLineSize,
+              let startY = startYOfSideObjects else {
             return nil
         }
         
@@ -386,18 +340,15 @@ class SpawnerManager {
         laneSeparator.backgroundColor = separateLineColor
         laneSeparator.isUserInteractionEnabled = false
         
-        viewController.view.addSubview(laneSeparator)
+        gameViewController.view.addSubview(laneSeparator)
         cachedLaneSeparators[side]?.append(laneSeparator)
         
         return laneSeparator
     }
     
     private func animateGeneratedSideObject(side: Side) {
-        guard let sideObject = generateRandomSideObject(side: side) else {
-            return
-        }
-        
-        guard let endY = endYOfSideObjects else {
+        guard let sideObject = generateRandomSideObject(side: side),
+              let endY = endYOfSideObjects else {
             return
         }
         
@@ -439,23 +390,10 @@ class SpawnerManager {
             objectSize = roadSignSize
         }
         
-        guard let size = objectSize else {
-            return nil
-        }
-        
-        guard let sideArea = sideAreaSize else {
-            return nil
-        }
-        
-        guard let view = viewSize else {
-            return nil
-        }
-        
-        guard let startY = startYOfSideObjects else {
-            return nil
-        }
-        
-        guard let viewController = gameViewController else {
+        guard let size = objectSize,
+              let sideArea = sideAreaSize,
+              let view = viewSize,
+              let startY = startYOfSideObjects else {
             return nil
         }
         
@@ -471,10 +409,10 @@ class SpawnerManager {
         let imageView = UIImageView(frame: CGRect(x: objectX, y: startY, width: size.width, height: size.height))
         imageView.contentMode = .scaleAspectFit
         imageView.isUserInteractionEnabled = false
-        let objectImage = UIImage(named: sideObjectImageName(object: object))
+        let objectImage = UIImage(named: ResourcesHelper.sideObjectImageName(object: object))
         imageView.image = objectImage
         
-        viewController.view.addSubview(imageView)
+        gameViewController.view.addSubview(imageView)
         
         switch object {
         case .tree:
@@ -502,23 +440,10 @@ class SpawnerManager {
             objectSize = truckSize
         }
         
-        guard let size = objectSize else {
-            return nil
-        }
-        
-        guard let sideArea = sideAreaSize else {
-            return nil
-        }
-        
-        guard let roadLane = roadLaneSize else {
-            return nil
-        }
-        
-        guard let startY = startYOfTrafficObjects else {
-            return nil
-        }
-        
-        guard let viewController = gameViewController else {
+        guard let size = objectSize,
+              let sideArea = sideAreaSize,
+              let roadLane = roadLaneSize,
+              let startY = startYOfTrafficObjects else {
             return nil
         }
         
@@ -537,11 +462,11 @@ class SpawnerManager {
         imageView.transform = CGAffineTransform(rotationAngle: .pi)
         imageView.contentMode = .scaleAspectFit
         imageView.isUserInteractionEnabled = false
-        let objectImage = UIImage(named: trafficObjectImageName(object: object))
+        let objectImage = UIImage(named: ResourcesHelper.trafficObjectImageName(object: object))
         imageView.image = objectImage
         imageView.layer.zPosition = 9
         
-        viewController.view.addSubview(imageView)
+        gameViewController.view.addSubview(imageView)
         
         switch object {
         case .car:
@@ -552,26 +477,6 @@ class SpawnerManager {
         }
         
         return imageView
-    }
-    
-    private func sideObjectImageName(object: SideObject) -> String {
-        switch object {
-        case .tree:
-            return "tree"
-        case .bush:
-            return "bush"
-        case .roadSign:
-            return "road_sign_\(Int.random(in: 1...2))"
-        }
-    }
-    
-    private func trafficObjectImageName(object: TrafficObject) -> String {
-        switch object {
-        case .car:
-            return "civil_car_\(Int.random(in: 1...3))"
-        case .truck:
-            return "truck"
-        }
     }
     
     private func cachedSideObject(object: SideObject, side: Side) -> UIImageView? {
@@ -621,21 +526,6 @@ class SpawnerManager {
         }
         
         return nil
-    }
-
-    func generateRandomVehicle() -> UIImageView? {
-        var lane = Lane.right
-        let randomItem = Int.random(in: 0...2)
-
-        if randomItem == 0 {
-            lane = .left
-        } else if randomItem == 1 {
-            lane = .middle
-        }
-
-        let randomVehicle = Int.random(in: 0...2)
-
-        return generateTrafficObject(object: randomVehicle == 2 ? .truck : .car, lane: lane)
     }
     
     private func cofigureObjectSizes(viewSize: CGSize) {

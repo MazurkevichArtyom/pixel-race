@@ -22,6 +22,7 @@
 		995F090027B911EA00B188E0 /* TrafficObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995F08FF27B911EA00B188E0 /* TrafficObject.swift */; };
 		99C34F9127B605C600B21DBF /* SpawnerManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C34F9027B605C600B21DBF /* SpawnerManger.swift */; };
 		99C34F9627B60DF600B21DBF /* CollisionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C34F9527B60DF600B21DBF /* CollisionManager.swift */; };
+		99DC5E7E27E29BCD00493C9A /* ResourcesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DC5E7D27E29BCD00493C9A /* ResourcesHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		995F08FF27B911EA00B188E0 /* TrafficObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficObject.swift; sourceTree = "<group>"; };
 		99C34F9027B605C600B21DBF /* SpawnerManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnerManger.swift; sourceTree = "<group>"; };
 		99C34F9527B60DF600B21DBF /* CollisionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionManager.swift; sourceTree = "<group>"; };
+		99DC5E7D27E29BCD00493C9A /* ResourcesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 		9921893627B1C45F00E12EFF /* PixelRace */ = {
 			isa = PBXGroup;
 			children = (
+				99DC5E7C27E29BBA00493C9A /* Helpers */,
 				995C282927B47313004CF564 /* Enums */,
 				995C282627B46A63004CF564 /* Managers */,
 				9921894B27B1C46B00E12EFF /* GameViewController */,
@@ -116,6 +119,14 @@
 				995F08FF27B911EA00B188E0 /* TrafficObject.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		99DC5E7C27E29BBA00493C9A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				99DC5E7D27E29BCD00493C9A /* ResourcesHelper.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,6 +207,7 @@
 				99C34F9627B60DF600B21DBF /* CollisionManager.swift in Sources */,
 				99C34F9127B605C600B21DBF /* SpawnerManger.swift in Sources */,
 				9921893827B1C45F00E12EFF /* AppDelegate.swift in Sources */,
+				99DC5E7E27E29BCD00493C9A /* ResourcesHelper.swift in Sources */,
 				9921893A27B1C45F00E12EFF /* SceneDelegate.swift in Sources */,
 				995F090027B911EA00B188E0 /* TrafficObject.swift in Sources */,
 				995C282B27B47323004CF564 /* Move.swift in Sources */,
