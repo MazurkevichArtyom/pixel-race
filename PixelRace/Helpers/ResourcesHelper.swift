@@ -27,4 +27,8 @@ class ResourcesHelper {
             return "truck"
         }
     }
+    
+    static func randomPlayersCarSkin() -> String {
+        return "car_\(Int.random(in: 1...3))"
+    }
 }

@@ -302,7 +302,7 @@ class SpawnerManager {
         let myCar = UIImageView(frame: CGRect(x: sideArea.width + roadLane.width + (roadLane.width - car.width) / 2.0 , y: view.height - view.height * 0.05 - car.height, width: car.width, height: car.height))
         myCar.contentMode = .scaleAspectFit
         myCar.isUserInteractionEnabled = false
-        let image = UIImage(named: "player_car")
+        let image = UIImage(named: ResourcesHelper.randomPlayersCarSkin())
         myCar.image = image
         myCar.layer.zPosition = 10
         
