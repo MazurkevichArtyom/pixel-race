@@ -9,26 +9,42 @@ import Foundation
 import UIKit
 
 class GameManager {
-    static let shared = GameManager()
+    private let viewController: UIViewController
+    private let spawnerManager: SpawnerManager
+    private let collisionManager: CollisionManager
     
     private let rotationAngle: CGFloat = 15 * .pi / 180
     
+    init(viewController: UIViewController) {
+        self.viewController = viewController
+        self.collisionManager = CollisionManager()
+        self.spawnerManager = SpawnerManager(collisionManager: collisionManager, viewController: viewController)
+    }
+    
+    func start() {
+        spawnerManager.startGameObjectSpawning()
+        collisionManager.startObserving(playersCar: spawnerManager.playersCar) {
+            self.spawnerManager.invalidate()
+            self.collisionManager.stopObserving()
+            self.viewController.navigationController?.popViewController(animated: false)
+        }
+    }
+    
+    func stop() {
+        
+    }
+    
+    func setupGameScene() {
+        spawnerManager.setupRacingLocation()
+    }
+    
     func movePlayersCar(move: Move) {
-        guard let car = SpawnerManager.shared.playersCar else {
-            return
-        }
-        
-        guard let roadLaneSize = SpawnerManager.shared.roadLaneSize else {
-            return
-        }
-        
-        guard let sideAreaSize = SpawnerManager.shared.sideAreaSize else {
-            return
-        }
-        
-        guard let viewSize = SpawnerManager.shared.viewSize else {
-            return
-        }
+        guard let car = spawnerManager.playersCar,
+              let roadLaneSize = spawnerManager.roadLaneSize,
+              let sideAreaSize = spawnerManager.sideAreaSize,
+              let viewSize = spawnerManager.viewSize else {
+                  return
+              }
         
         var destinationPoint = car.center
         var carRotationAngle = rotationAngle
@@ -50,6 +66,6 @@ class GameManager {
                 car.transform = CGAffineTransform(rotationAngle: 0)
             }
         }
-
+        
     }
 }
