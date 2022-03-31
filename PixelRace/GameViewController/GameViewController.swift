@@ -9,20 +9,21 @@ import UIKit
 
 class GameViewController: UIViewController {
     private var debugTimer: Timer?
+    private var gameManager: GameManager?
     
-    // GameManager init(VC) - SpawnerManager and CollisionManager
-    // Don't need singleton
-    // VC should know only aboug GameManager
     // Need to move all animations to GameManager
     // Need to create GameObject with speed proprty
-
+    
     override func loadView() {
         let customView = UIView(frame: UIScreen.main.bounds)
         customView.backgroundColor = .white
         view = customView
         
         setupControlGestures()
-        setupGameScene();
+        
+        let gm = GameManager(viewController: self)
+        gm.setupGameScene();
+        gameManager = gm
     }
     
     override func viewDidLoad() {
@@ -30,14 +31,11 @@ class GameViewController: UIViewController {
         // Do any additional setup after loading the view.
         debugTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(debugInfo), userInfo: nil, repeats: true)
         
-        SpawnerManager.shared.startLaneSeparatorsSpawning()
-        SpawnerManager.shared.startSideObjectsSpawning()
-        SpawnerManager.shared.startTrafficFlowSpawning()
-        CollisionManager.shared.startObserving() {
-            SpawnerManager.shared.invalidate()
-            CollisionManager.shared.stopObserving()
-            self.navigationController?.popViewController(animated: false)
+        guard let gameManager = gameManager else {
+            return
         }
+        
+        gameManager.start()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,10 +49,13 @@ class GameViewController: UIViewController {
         debugTimer?.invalidate()
     }
     
-    private func setupGameScene() {
-        SpawnerManager.shared.setupViewController(viewController: self)
-        SpawnerManager.shared.setupRacingLocation()
+    @objc private func onSwipe(gesture: UISwipeGestureRecognizer) {
+        movePlayersCar(direction: gesture.direction)
     }
+    
+    @objc private func debugInfo() {
+    }
+    
     
     private func setupControlGestures() {
         let leftSwipeGR = UISwipeGestureRecognizer(target: self, action: #selector(onSwipe))
@@ -67,20 +68,17 @@ class GameViewController: UIViewController {
     }
     
     private func movePlayersCar(direction: UISwipeGestureRecognizer.Direction) {
+        guard let gameManager = gameManager else {
+            return
+        }
+        
         switch direction {
         case .left:
-            GameManager.shared.movePlayersCar(move: .left)
+            gameManager.movePlayersCar(move: .left)
         case .right:
-            GameManager.shared.movePlayersCar(move: .right)
+            gameManager.movePlayersCar(move: .right)
         default: break
         }
-    }
-    
-    @objc private func onSwipe(gesture: UISwipeGestureRecognizer) {
-        movePlayersCar(direction: gesture.direction)
-    }
-    
-    @objc private func debugInfo() {
     }
     /*
      // MARK: - Navigation

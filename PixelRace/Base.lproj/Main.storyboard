@@ -6,6 +6,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="PublicPixel.ttf">
+            <string>PublicPixel</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -33,12 +38,20 @@
                                     <constraint firstAttribute="width" secondItem="as2-gT-BDz" secondAttribute="height" multiplier="379:150" id="EIA-cG-FF5"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="v1.0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZSR-vm-yfH">
+                                <rect key="frame" x="339" y="844" width="60" height="10"/>
+                                <fontDescription key="fontDescription" name="PublicPixel" family="Public Pixel" pointSize="10"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.18039217590000001" green="0.18039217590000001" blue="0.18039217590000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="as2-gT-BDz" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="71k-Jz-9u0"/>
                             <constraint firstItem="acp-xz-Gd3" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.2" id="9s7-xI-oS1"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ZSR-vm-yfH" secondAttribute="bottom" constant="8" id="EtP-lv-olz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ZSR-vm-yfH" secondAttribute="trailing" constant="15" id="Lvs-Lc-sIK"/>
                             <constraint firstItem="acp-xz-Gd3" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" constant="10" id="abN-Xf-BzJ"/>
                             <constraint firstItem="as2-gT-BDz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="gkn-JS-Rqw"/>
                             <constraint firstItem="as2-gT-BDz" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="ild-Dm-g0q"/>
