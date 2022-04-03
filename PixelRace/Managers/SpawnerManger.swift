@@ -305,7 +305,7 @@ class SpawnerManager {
         let image = UIImage(named: ResourcesHelper.randomPlayersCarSkin())
         myCar.image = image
         myCar.layer.zPosition = 10
-        myCar.applyShadow(offset: CGSize(width: 4, height: 3), radius: 7)
+        myCar.applyShadow(offset: CGSize(width: 5, height: 4), radius: 3)
         
         playersCar = myCar
         
@@ -466,7 +466,7 @@ class SpawnerManager {
         let objectImage = UIImage(named: ResourcesHelper.trafficObjectImageName(object: object))
         imageView.image = objectImage
         imageView.layer.zPosition = 9
-        imageView.applyShadow(offset: CGSize(width: -4, height: -3), radius: object == .truck ? 10 : 7)
+        imageView.applyShadow(offset: CGSize(width: -5, height: -4), radius: object == .truck ? 5 : 3)
         
         gameViewController.view.addSubview(imageView)
         
