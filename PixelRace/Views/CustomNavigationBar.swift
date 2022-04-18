@@ -7,19 +7,15 @@
 
 import UIKit
 
-enum NavigationBarMode {
-    case none
-    case back
-    case save
-}
-
 class CustomNavigationBar: UIView {
-    
-    private let options: [NavigationBarMode]
     private var titleLabel: UILabel?
     
-    init(navigationBarOptions: [NavigationBarMode]) {
-        options = navigationBarOptions
+    private var leftItem: CustomNavigationBarItem?
+    private var rightItem: CustomNavigationBarItem?
+    
+    init(leftItem: CustomNavigationBarItem?, rightItem: CustomNavigationBarItem?) {
+        self.leftItem = leftItem
+        self.rightItem = rightItem
         super.init(frame: .zero)
         setupNavigationBar()
     }
@@ -36,24 +32,34 @@ class CustomNavigationBar: UIView {
     
     private func setupNavigationBar() {
         let leftButton = UIButton()
-        leftButton.setImage(UIImage(named: "button_back"), for: .normal)
         leftButton.translatesAutoresizingMaskIntoConstraints = false
         addSubview(leftButton)
         leftButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1.0).isActive = true
         leftButton.widthAnchor.constraint(equalTo: self.heightAnchor).isActive = true
         leftButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16.0).isActive = true
         leftButton.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        leftButton.isHidden = !options.contains(.back)
+        
+        if let leftItem = leftItem {
+            leftButton.setImage(UIImage(named: leftItem.imageName), for: .normal)
+            leftButton.addTarget(self, action: #selector(onLeftButtonTapped), for: .touchUpInside)
+        } else {
+            leftButton.isHidden = true
+        }
         
         let rightButton = UIButton()
-        rightButton.setImage(UIImage(named: "button_save"), for: .normal)
         rightButton.translatesAutoresizingMaskIntoConstraints = false
         addSubview(rightButton)
         rightButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1.0).isActive = true
         rightButton.widthAnchor.constraint(equalTo: self.heightAnchor).isActive = true
         rightButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16.0).isActive = true
         rightButton.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        rightButton.isHidden = !options.contains(.save)
+        
+        if let rightItem = rightItem {
+            rightButton.setImage(UIImage(named: rightItem.imageName), for: .normal)
+            rightButton.addTarget(self, action: #selector(onRightButtonTapped), for: .touchUpInside)
+        } else {
+            rightButton.isHidden = true
+        }
         
         let label = UILabel()
         label.textColor = .white
@@ -68,11 +74,23 @@ class CustomNavigationBar: UIView {
         
         titleLabel = label
     }
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    
+    @objc private func onLeftButtonTapped() {
+        if let leftItem = leftItem {
+            leftItem.itemAction()
+        }
     }
-    */
+    
+    @objc private func onRightButtonTapped() {
+        if let rightItem = rightItem {
+            rightItem.itemAction()
+        }
+    }
+    /*
+     // Only override draw() if you perform custom drawing.
+     // An empty implementation adversely affects performance during animation.
+     override func draw(_ rect: CGRect) {
+     // Drawing code
+     }
+     */
 }

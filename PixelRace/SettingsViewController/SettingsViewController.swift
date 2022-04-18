@@ -23,7 +23,16 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let bar = CustomNavigationBar(navigationBarOptions: [.back, .save])
+        let leftItem = CustomNavigationBarItem(imageName: "button_back", itemAction: {
+            self.navigationController?.popViewController(animated: false)
+        })
+        
+        let rightItem = CustomNavigationBarItem(imageName: "button_save", itemAction: {
+            self.navigationController?.popViewController(animated: false)
+        })
+        
+        let bar = CustomNavigationBar(leftItem: leftItem, rightItem: rightItem)
+        
         bar.translatesAutoresizingMaskIntoConstraints = false
         bar.setTitle(title: "SETTINGS")
         view.addSubview(bar)
