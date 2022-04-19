@@ -13,34 +13,22 @@ class SettingsViewController: UIViewController {
         let customView = UIView(frame: UIScreen.main.bounds)
         customView.backgroundColor = UIColor(hex: 0x2E2E2E)
         view = customView
+        setupNavigationBar()
     }
     
     let rectangleImage = UIImageView()
     let hardContainer = UIView()
     let easyContainer = UIView()
     let normalContainer = UIView()
-
+    
+    var customNavigationBar: CustomNavigationBar?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let leftItem = CustomNavigationBarItem(imageName: "button_back", itemAction: {
-            self.navigationController?.popViewController(animated: false)
-        })
         
-        let rightItem = CustomNavigationBarItem(imageName: "button_save", itemAction: {
-            self.navigationController?.popViewController(animated: false)
-        })
-        
-        let bar = CustomNavigationBar(leftItem: leftItem, rightItem: rightItem)
-        
-        bar.translatesAutoresizingMaskIntoConstraints = false
-        bar.setTitle(title: "SETTINGS")
-        view.addSubview(bar)
-        
-        bar.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
-        bar.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        bar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
-        bar.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
+        guard let customNavigationBar = customNavigationBar else {
+            return
+        }
         
         let selectCarLabel = UILabel()
         selectCarLabel.textColor = .white
@@ -51,7 +39,52 @@ class SettingsViewController: UIViewController {
         view.addSubview(selectCarLabel)
         selectCarLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         selectCarLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        selectCarLabel.topAnchor.constraint(equalTo: bar.bottomAnchor, constant: 80).isActive = true
+        selectCarLabel.topAnchor.constraint(equalTo: customNavigationBar.bottomAnchor, constant: 80).isActive = true
+        
+        let selectCarContainer = UIView()
+        selectCarContainer.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(selectCarContainer)
+        selectCarContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        selectCarContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        selectCarContainer.topAnchor.constraint(equalTo: selectCarLabel.bottomAnchor, constant: 40).isActive = true
+        selectCarContainer.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.15, constant: 1.0).isActive = true
+        
+        let carContainer = UIView()
+        carContainer.translatesAutoresizingMaskIntoConstraints = false
+        carContainer.clipsToBounds = true
+        selectCarContainer.addSubview(carContainer)
+        carContainer.topAnchor.constraint(equalTo: selectCarContainer.topAnchor).isActive = true
+        carContainer.bottomAnchor.constraint(equalTo: selectCarContainer.bottomAnchor).isActive = true
+        carContainer.widthAnchor.constraint(equalTo: selectCarContainer.widthAnchor, multiplier: 0.3, constant: 1.0).isActive = true
+        carContainer.centerXAnchor.constraint(equalTo: selectCarContainer.centerXAnchor).isActive = true
+        
+        let carImage = UIImageView()
+        carImage.contentMode = .scaleAspectFit
+        carImage.image = UIImage(named: ResourcesHelper.randomPlayersCarSkin())
+        carImage.translatesAutoresizingMaskIntoConstraints = false
+        carContainer.addSubview(carImage);
+        carImage.leadingAnchor.constraint(equalTo: carContainer.leadingAnchor).isActive = true
+        carImage.trailingAnchor.constraint(equalTo: carContainer.trailingAnchor).isActive = true
+        carImage.topAnchor.constraint(equalTo: carContainer.topAnchor).isActive = true
+        carImage.bottomAnchor.constraint(equalTo: carContainer.bottomAnchor).isActive = true
+        
+        let nextCarButton = UIButton()
+        nextCarButton.translatesAutoresizingMaskIntoConstraints = false
+        nextCarButton.setImage(UIImage(named: "button_arrow"), for: .normal)
+        selectCarContainer.addSubview(nextCarButton)
+        nextCarButton.trailingAnchor.constraint(equalTo: carContainer.leadingAnchor, constant: -20).isActive = true
+        nextCarButton.heightAnchor.constraint(equalTo: selectCarContainer.heightAnchor, multiplier: 0.4, constant: 1.0).isActive = true
+        nextCarButton.widthAnchor.constraint(equalTo: nextCarButton.heightAnchor, multiplier: 0.7, constant: 1.0).isActive = true
+        nextCarButton.centerYAnchor.constraint(equalTo: carContainer.centerYAnchor).isActive = true
+        
+        let previousCarButton = UIButton()
+        previousCarButton.translatesAutoresizingMaskIntoConstraints = false
+        previousCarButton.setImage(UIImage(named: "button_arrow")?.withHorizontallyFlippedOrientation(), for: .normal)
+        selectCarContainer.addSubview(previousCarButton)
+        previousCarButton.leadingAnchor.constraint(equalTo: carContainer.trailingAnchor, constant: 20).isActive = true
+        previousCarButton.heightAnchor.constraint(equalTo: selectCarContainer.heightAnchor, multiplier: 0.4, constant: 1.0).isActive = true
+        previousCarButton.widthAnchor.constraint(equalTo: previousCarButton.heightAnchor, multiplier: 0.7, constant: 1.0).isActive = true
+        previousCarButton.centerYAnchor.constraint(equalTo: carContainer.centerYAnchor).isActive = true
         
         let difficultyLabel = UILabel()
         difficultyLabel.textColor = .white
@@ -62,7 +95,7 @@ class SettingsViewController: UIViewController {
         view.addSubview(difficultyLabel)
         difficultyLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         difficultyLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        difficultyLabel.topAnchor.constraint(equalTo: selectCarLabel.bottomAnchor, constant: 60).isActive = true
+        difficultyLabel.topAnchor.constraint(equalTo: selectCarContainer.bottomAnchor, constant: 60).isActive = true
         
         let difficultiesContainer = UIView()
         difficultiesContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -99,7 +132,7 @@ class SettingsViewController: UIViewController {
         rectangleImage.widthAnchor.constraint(equalTo: easyContainer.widthAnchor).isActive = true
         rectangleImage.centerYAnchor.constraint(equalTo: difficultiesContainer.centerYAnchor).isActive = true
         rectangleImage.leadingAnchor.constraint(equalTo: easyContainer.leadingAnchor).isActive = true
-
+        
         normalContainer.translatesAutoresizingMaskIntoConstraints = false
         difficultiesContainer.addSubview(normalContainer)
         normalContainer.heightAnchor.constraint(equalTo: difficultiesContainer.heightAnchor, multiplier: 1.0).isActive = true
@@ -134,17 +167,17 @@ class SettingsViewController: UIViewController {
         hardImage.trailingAnchor.constraint(equalTo: hardContainer.trailingAnchor, constant: -imageSpacing).isActive = true
         hardImage.bottomAnchor.constraint(equalTo: hardContainer.bottomAnchor, constant: -imageSpacing).isActive = true
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(onTapHard));
-        let tap2 = UITapGestureRecognizer(target: self, action: #selector(onTapHard));
-        let tap3 = UITapGestureRecognizer(target: self, action: #selector(onTapHard));
-
-        easyContainer.addGestureRecognizer(tap)
-        normalContainer.addGestureRecognizer(tap2)
-        hardContainer.addGestureRecognizer(tap3)
+        let easyTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onDifficultySelected));
+        let normalTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onDifficultySelected));
+        let hardTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onDifficultySelected));
+        
+        easyContainer.addGestureRecognizer(easyTapGestureRecognizer)
+        normalContainer.addGestureRecognizer(normalTapGestureRecognizer)
+        hardContainer.addGestureRecognizer(hardTapGestureRecognizer)
         // Do any additional setup after loading the view.
     }
     
-    @objc private func onTapHard(gestureRecognizer: UITapGestureRecognizer) {
+    @objc private func onDifficultySelected(gestureRecognizer: UITapGestureRecognizer) {
         guard let selectedView = gestureRecognizer.view else {
             return
         }
@@ -166,15 +199,36 @@ class SettingsViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setupNavigationBar() {
+        let leftItem = CustomNavigationBarItem(imageName: "button_back", itemAction: {
+            self.navigationController?.popViewController(animated: false)
+        })
+        let rightItem = CustomNavigationBarItem(imageName: "button_save", itemAction: tryToSaveSettings)
+        let bar = CustomNavigationBar(leftItem: leftItem, rightItem: rightItem)
+        
+        bar.translatesAutoresizingMaskIntoConstraints = false
+        bar.setTitle(title: "SETTINGS")
+        view.addSubview(bar)
+        
+        bar.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
+        bar.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        bar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        bar.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
+        
+        customNavigationBar = bar
     }
-    */
-
+    
+    private func tryToSaveSettings() {
+        navigationController?.popViewController(animated: false)
+    }
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

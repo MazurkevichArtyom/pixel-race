@@ -8,8 +8,8 @@
 import UIKit
 
 class CustomNavigationBar: UIView {
-    private var titleLabel: UILabel?
     
+    private var titleLabel: UILabel?
     private var leftItem: CustomNavigationBarItem?
     private var rightItem: CustomNavigationBarItem?
     
