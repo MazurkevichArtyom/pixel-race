@@ -9,23 +9,96 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     
-    override func loadView() {
-        let customView = UIView(frame: UIScreen.main.bounds)
-        customView.backgroundColor = UIColor(hex: 0x2E2E2E)
-        view = customView
-        setupNavigationBar()
-    }
-    
+    let selectCarContainer = UIView()
     let rectangleImage = UIImageView()
     let hardContainer = UIView()
     let easyContainer = UIView()
     let normalContainer = UIView()
+    let carImage = UIImageView()
+    let nextCarButton = UIButton()
+    let previousCarButton = UIButton()
+    
+    var settings = Settings()
     
     var customNavigationBar: CustomNavigationBar?
     
+    override func loadView() {
+        let customView = UIView(frame: UIScreen.main.bounds)
+        customView.backgroundColor = K.Colors.mainBackgroundColor
+        view = customView
+        setupNavigationBar()
+        setupSelectCarView()
+        setupDifficultyView()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        tryToGetSettings()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        applySettings()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    @objc private func onDifficultySelected(gestureRecognizer: UITapGestureRecognizer) {
+        guard let selectedView = gestureRecognizer.view else {
+            return
+        }
         
+        if selectedView == easyContainer {
+            settings.difficulty = .easy
+        } else if selectedView == normalContainer {
+            settings.difficulty = .normal
+        } else if selectedView == hardContainer {
+            settings.difficulty = .hard
+        }
+        
+        if (rectangleImage.transform.tx != selectedView.frame.origin.x) {
+            UIView.animate(withDuration: 0.3) {
+                self.rectangleImage.transform = CGAffineTransform(translationX: selectedView.frame.origin.x, y: 0)
+            }
+        }
+    }
+    
+    @objc private func onSelectCar(sender: UIButton) {
+        if abs(sender.tag) == 1 {
+            let newSkinnId = (settings.skinId - 1 + sender.tag + 3) % 3 + 1
+            settings.skinId = newSkinnId
+            carImage.image = UIImage(named: ResourcesHelper.playersCarSkin(skinId: settings.skinId))
+        }
+    }
+    
+    private func setupNavigationBar() {
+        let leftItem = CustomNavigationBarItem(imageName: "button_back", itemAction: {
+            self.navigationController?.popViewController(animated: false)
+        })
+        let rightItem = CustomNavigationBarItem(imageName: "button_save", itemAction: tryToSaveSettings)
+        let bar = CustomNavigationBar(leftItem: leftItem, rightItem: rightItem)
+        
+        bar.translatesAutoresizingMaskIntoConstraints = false
+        bar.setTitle(title: "SETTINGS")
+        view.addSubview(bar)
+        
+        bar.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
+        bar.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        bar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        bar.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
+        
+        customNavigationBar = bar
+    }
+    
+    private func setupSelectCarView() {
         guard let customNavigationBar = customNavigationBar else {
             return
         }
@@ -41,7 +114,6 @@ class SettingsViewController: UIViewController {
         selectCarLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         selectCarLabel.topAnchor.constraint(equalTo: customNavigationBar.bottomAnchor, constant: 80).isActive = true
         
-        let selectCarContainer = UIView()
         selectCarContainer.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(selectCarContainer)
         selectCarContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -58,9 +130,7 @@ class SettingsViewController: UIViewController {
         carContainer.widthAnchor.constraint(equalTo: selectCarContainer.widthAnchor, multiplier: 0.3, constant: 1.0).isActive = true
         carContainer.centerXAnchor.constraint(equalTo: selectCarContainer.centerXAnchor).isActive = true
         
-        let carImage = UIImageView()
         carImage.contentMode = .scaleAspectFit
-        carImage.image = UIImage(named: ResourcesHelper.randomPlayersCarSkin())
         carImage.translatesAutoresizingMaskIntoConstraints = false
         carContainer.addSubview(carImage);
         carImage.leadingAnchor.constraint(equalTo: carContainer.leadingAnchor).isActive = true
@@ -68,24 +138,28 @@ class SettingsViewController: UIViewController {
         carImage.topAnchor.constraint(equalTo: carContainer.topAnchor).isActive = true
         carImage.bottomAnchor.constraint(equalTo: carContainer.bottomAnchor).isActive = true
         
-        let nextCarButton = UIButton()
-        nextCarButton.translatesAutoresizingMaskIntoConstraints = false
-        nextCarButton.setImage(UIImage(named: "button_arrow"), for: .normal)
-        selectCarContainer.addSubview(nextCarButton)
-        nextCarButton.trailingAnchor.constraint(equalTo: carContainer.leadingAnchor, constant: -20).isActive = true
-        nextCarButton.heightAnchor.constraint(equalTo: selectCarContainer.heightAnchor, multiplier: 0.4, constant: 1.0).isActive = true
-        nextCarButton.widthAnchor.constraint(equalTo: nextCarButton.heightAnchor, multiplier: 0.7, constant: 1.0).isActive = true
-        nextCarButton.centerYAnchor.constraint(equalTo: carContainer.centerYAnchor).isActive = true
-        
-        let previousCarButton = UIButton()
         previousCarButton.translatesAutoresizingMaskIntoConstraints = false
-        previousCarButton.setImage(UIImage(named: "button_arrow")?.withHorizontallyFlippedOrientation(), for: .normal)
+        previousCarButton.tag = -1
+        previousCarButton.setImage(UIImage(named: "button_arrow"), for: .normal)
+        previousCarButton.addTarget(self, action: #selector(onSelectCar), for: .touchUpInside)
         selectCarContainer.addSubview(previousCarButton)
-        previousCarButton.leadingAnchor.constraint(equalTo: carContainer.trailingAnchor, constant: 20).isActive = true
+        previousCarButton.trailingAnchor.constraint(equalTo: carContainer.leadingAnchor, constant: -20).isActive = true
         previousCarButton.heightAnchor.constraint(equalTo: selectCarContainer.heightAnchor, multiplier: 0.4, constant: 1.0).isActive = true
         previousCarButton.widthAnchor.constraint(equalTo: previousCarButton.heightAnchor, multiplier: 0.7, constant: 1.0).isActive = true
         previousCarButton.centerYAnchor.constraint(equalTo: carContainer.centerYAnchor).isActive = true
         
+        nextCarButton.translatesAutoresizingMaskIntoConstraints = false
+        nextCarButton.tag = 1
+        nextCarButton.setImage(UIImage(named: "button_arrow")?.withHorizontallyFlippedOrientation(), for: .normal)
+        nextCarButton.addTarget(self, action: #selector(onSelectCar), for: .touchUpInside)
+        selectCarContainer.addSubview(nextCarButton)
+        nextCarButton.leadingAnchor.constraint(equalTo: carContainer.trailingAnchor, constant: 20).isActive = true
+        nextCarButton.heightAnchor.constraint(equalTo: selectCarContainer.heightAnchor, multiplier: 0.4, constant: 1.0).isActive = true
+        nextCarButton.widthAnchor.constraint(equalTo: nextCarButton.heightAnchor, multiplier: 0.7, constant: 1.0).isActive = true
+        nextCarButton.centerYAnchor.constraint(equalTo: carContainer.centerYAnchor).isActive = true
+    }
+    
+    private func setupDifficultyView() {
         let difficultyLabel = UILabel()
         difficultyLabel.textColor = .white
         difficultyLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -174,52 +248,38 @@ class SettingsViewController: UIViewController {
         easyContainer.addGestureRecognizer(easyTapGestureRecognizer)
         normalContainer.addGestureRecognizer(normalTapGestureRecognizer)
         hardContainer.addGestureRecognizer(hardTapGestureRecognizer)
-        // Do any additional setup after loading the view.
     }
     
-    @objc private func onDifficultySelected(gestureRecognizer: UITapGestureRecognizer) {
-        guard let selectedView = gestureRecognizer.view else {
-            return
-        }
+    private func tryToSaveSettings() {
+        let data = try? JSONEncoder().encode(settings)
+        UserDefaults.standard.set(data, forKey: K.UserDefaults.settings)
         
-        if (rectangleImage.transform.tx != selectedView.frame.origin.x) {
-            UIView.animate(withDuration: 0.3) {
-                self.rectangleImage.transform = CGAffineTransform(translationX: selectedView.frame.origin.x, y: 0)
+        navigationController?.popViewController(animated: false)
+    }
+    
+    private func tryToGetSettings() {
+        if let savedData = UserDefaults.standard.value(forKey: K.UserDefaults.settings) as? Data {
+            if let savedSettings = try? JSONDecoder().decode(Settings.self, from: savedData) {
+                settings = savedSettings
             }
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
-    
-    private func setupNavigationBar() {
-        let leftItem = CustomNavigationBarItem(imageName: "button_back", itemAction: {
-            self.navigationController?.popViewController(animated: false)
-        })
-        let rightItem = CustomNavigationBarItem(imageName: "button_save", itemAction: tryToSaveSettings)
-        let bar = CustomNavigationBar(leftItem: leftItem, rightItem: rightItem)
+    private func applySettings() {
+        carImage.image = UIImage(named: ResourcesHelper.playersCarSkin(skinId: settings.skinId))
         
-        bar.translatesAutoresizingMaskIntoConstraints = false
-        bar.setTitle(title: "SETTINGS")
-        view.addSubview(bar)
+        var selectedView = easyContainer
         
-        bar.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
-        bar.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        bar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
-        bar.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
+        switch settings.difficulty {
+        case .easy:
+            selectedView = easyContainer
+        case .normal:
+            selectedView = normalContainer
+        case .hard:
+            selectedView = hardContainer
+        }
         
-        customNavigationBar = bar
-    }
-    
-    private func tryToSaveSettings() {
-        navigationController?.popViewController(animated: false)
+        rectangleImage.transform = CGAffineTransform(translationX: selectedView.frame.origin.x, y: 0)
     }
     /*
      // MARK: - Navigation

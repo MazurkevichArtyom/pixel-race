@@ -8,11 +8,11 @@
 import Foundation
 
 struct Settings: Codable {
-    let difficulty: Difficulty
-    let skin: String
+    var difficulty: Difficulty = .normal
+    var skinId: Int = 1
     
     enum CodingKeys: String, CodingKey {
             case difficulty
-            case skin
+            case skinId
         }
 }
