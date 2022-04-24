@@ -24,14 +24,8 @@ class GameManager {
     func start() {
         spawnerManager.startGameObjectSpawning()
         collisionManager.startObserving(playersCar: spawnerManager.playersCar) {
-            self.spawnerManager.invalidate()
-            self.collisionManager.stopObserving()
-            self.viewController.navigationController?.popViewController(animated: false)
+            self.gameOver()
         }
-    }
-    
-    func stop() {
-        
     }
     
     func setupGameScene() {
@@ -67,5 +61,16 @@ class GameManager {
             }
         }
         
+    }
+    
+    private func gameOver() {
+        spawnerManager.invalidate()
+        collisionManager.stopObserving()
+        
+        if let gameResult = spawnerManager.gameResult() {
+            ResultsManager.saveResult(result: gameResult)
+        }
+        
+        viewController.navigationController?.popViewController(animated: false)
     }
 }

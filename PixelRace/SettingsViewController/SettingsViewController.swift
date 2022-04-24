@@ -252,13 +252,13 @@ class SettingsViewController: UIViewController {
     
     private func tryToSaveSettings() {
         let data = try? JSONEncoder().encode(settings)
-        UserDefaults.standard.set(data, forKey: K.UserDefaults.settings)
+        UserDefaults.standard.set(data, forKey: K.Strings.settings)
         
         navigationController?.popViewController(animated: false)
     }
     
     private func tryToGetSettings() {
-        if let savedData = UserDefaults.standard.value(forKey: K.UserDefaults.settings) as? Data {
+        if let savedData = UserDefaults.standard.value(forKey: K.Strings.settings) as? Data {
             if let savedSettings = try? JSONDecoder().decode(Settings.self, from: savedData) {
                 settings = savedSettings
             }

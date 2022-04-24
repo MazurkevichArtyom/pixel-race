@@ -11,13 +11,12 @@ import UIKit
 class SpawnerManager {
     var playersCar: UIImageView?
     
+    private var trafficCount = 0
+    private var settings = Settings()
+    private var startGameDate: Date?
+
     private let collisionManager: CollisionManager
     private let gameViewController: UIViewController
-    
-    private let sideColor = UIColor(hex: 0x76AC1F)
-    private let laneColor = UIColor(hex: 0xA0A0A0)
-    private let sideSeparatorColor = UIColor(hex: 0x787878)
-    private let separateLineColor = UIColor.white
     
     private let staticObjectDuration = 2.5
     
@@ -53,6 +52,8 @@ class SpawnerManager {
         self.collisionManager = collisionManager
         self.gameViewController = viewController
         self.cofigureObjectSizes(viewSize: gameViewController.view.frame.size)
+        
+        tryToGetSettings()
     }
     
     func setupRacingLocation() {
@@ -70,6 +71,8 @@ class SpawnerManager {
     }
     
     func startGameObjectSpawning() {
+        startGameDate = Date()
+
         startLaneSeparatorsSpawning()
         startSideObjectsSpawning()
         startTrafficFlowSpawning()
@@ -84,6 +87,22 @@ class SpawnerManager {
         gameViewController.view.layer.removeAllAnimations()
         
         clearAllCachedData()
+    }
+    
+    func gameResult() -> Result? {
+        if let startDate = startGameDate {
+            return Result(difficulty: settings.difficulty, trafficCount: trafficCount, timeDuration: abs(startDate.timeIntervalSinceNow))
+        } else {
+            return nil
+        }
+    }
+    
+    private func tryToGetSettings() {
+        if let savedData = UserDefaults.standard.value(forKey: K.Strings.settings) as? Data {
+            if let savedSettings = try? JSONDecoder().decode(Settings.self, from: savedData) {
+                settings = savedSettings
+            }
+        }
     }
     
     private func startLaneSeparatorsSpawning() {
@@ -209,6 +228,7 @@ class SpawnerManager {
         } completion: { finish in
             vehicle.center = enemysCarInitialCenter
             vehicle.isHidden = true
+            self.trafficCount += 1
             self.collisionManager.removeObservableObject(observable: vehicle)
         }
         
@@ -237,7 +257,7 @@ class SpawnerManager {
               }
         
         let side = UIView(frame: CGRect(x: side == .left ? 0 : view.width - sideArea.width, y: 0, width: sideArea.width, height: sideArea.height))
-        side.backgroundColor = sideColor
+        side.backgroundColor = K.Colors.sideColor
         side.isUserInteractionEnabled = false
         
         gameViewController.view.addSubview(side)
@@ -261,7 +281,7 @@ class SpawnerManager {
         }
         
         let lane = UIView(frame: CGRect(x: laneX, y: 0, width: roadLane.width, height: roadLane.height))
-        lane.backgroundColor = laneColor
+        lane.backgroundColor = K.Colors.laneColor
         lane.isUserInteractionEnabled = false
         
         gameViewController.view.addSubview(lane)
@@ -285,7 +305,7 @@ class SpawnerManager {
         }
         
         let line = UIView(frame: CGRect(x: lineX, y: 0, width: separateLine.width, height: view.height))
-        line.backgroundColor = sideSeparatorColor
+        line.backgroundColor = K.Colors.sideSeparatorColor
         line.isUserInteractionEnabled = false
         
         gameViewController.view.addSubview(line)
@@ -302,7 +322,7 @@ class SpawnerManager {
         let myCar = UIImageView(frame: CGRect(x: sideArea.width + roadLane.width + (roadLane.width - car.width) / 2.0 , y: view.height - view.height * 0.05 - car.height, width: car.width, height: car.height))
         myCar.contentMode = .scaleAspectFit
         myCar.isUserInteractionEnabled = false
-        let image = UIImage(named: ResourcesHelper.randomPlayersCarSkin())
+        let image = UIImage(named: ResourcesHelper.playersCarSkin(skinId: settings.skinId))
         myCar.image = image
         myCar.layer.zPosition = 10
         myCar.applyShadow(offset: CGSize(width: 5, height: 4), radius: 3)
@@ -338,7 +358,7 @@ class SpawnerManager {
         }
         
         let laneSeparator = UIView(frame: CGRect(x: lineX, y: startY, width: separateLine.width, height: separateLine.height))
-        laneSeparator.backgroundColor = separateLineColor
+        laneSeparator.backgroundColor = K.Colors.separateLineColor
         laneSeparator.isUserInteractionEnabled = false
         
         gameViewController.view.addSubview(laneSeparator)

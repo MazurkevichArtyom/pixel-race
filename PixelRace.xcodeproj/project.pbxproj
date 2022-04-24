@@ -16,6 +16,7 @@
 		9921894427B1C45F00E12EFF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9921894227B1C45F00E12EFF /* LaunchScreen.storyboard */; };
 		9921894D27B1C48A00E12EFF /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9921894C27B1C48A00E12EFF /* GameViewController.swift */; };
 		9929DA402814A0A60038DF03 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9929DA3F2814A0A60038DF03 /* Constants.swift */; };
+		9929DA422814B3B30038DF03 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9929DA412814B3B30038DF03 /* Result.swift */; };
 		993ABD6127F9CF2F006DFECF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993ABD6027F9CF2F006DFECF /* SettingsViewController.swift */; };
 		993ABD6427FA0269006DFECF /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993ABD6327FA0269006DFECF /* CustomNavigationBar.swift */; };
 		993EF14A27B7F44C002B8B6D /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993EF14927B7F44C002B8B6D /* UIColor+Hex.swift */; };
@@ -31,6 +32,7 @@
 		99CBBCBE280E262B006EEEE3 /* CustomNavigationBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CBBCBD280E262B006EEEE3 /* CustomNavigationBarItem.swift */; };
 		99CBBCC0280E2D8D006EEEE3 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CBBCBF280E2D8D006EEEE3 /* Settings.swift */; };
 		99CBBCC2280E2E4A006EEEE3 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CBBCC1280E2E4A006EEEE3 /* Difficulty.swift */; };
+		99DC38352815B0C300035572 /* ResultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DC38342815B0C300035572 /* ResultsManager.swift */; };
 		99DC5E7E27E29BCD00493C9A /* ResourcesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DC5E7D27E29BCD00493C9A /* ResourcesHelper.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +48,7 @@
 		9921894527B1C45F00E12EFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9921894C27B1C48A00E12EFF /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		9929DA3F2814A0A60038DF03 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9929DA412814B3B30038DF03 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		993ABD6027F9CF2F006DFECF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		993ABD6327FA0269006DFECF /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
 		993EF14927B7F44C002B8B6D /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
@@ -61,6 +64,7 @@
 		99CBBCBD280E262B006EEEE3 /* CustomNavigationBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBarItem.swift; sourceTree = "<group>"; };
 		99CBBCBF280E2D8D006EEEE3 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		99CBBCC1280E2E4A006EEEE3 /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
+		99DC38342815B0C300035572 /* ResultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsManager.swift; sourceTree = "<group>"; };
 		99DC5E7D27E29BCD00493C9A /* ResourcesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -162,6 +166,7 @@
 				995C282727B46A80004CF564 /* GameManager.swift */,
 				99C34F9027B605C600B21DBF /* SpawnerManger.swift */,
 				99C34F9527B60DF600B21DBF /* CollisionManager.swift */,
+				99DC38342815B0C300035572 /* ResultsManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -184,6 +189,7 @@
 			children = (
 				99CBBCBD280E262B006EEEE3 /* CustomNavigationBarItem.swift */,
 				99CBBCBF280E2D8D006EEEE3 /* Settings.swift */,
+				9929DA412814B3B30038DF03 /* Result.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -269,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9921894D27B1C48A00E12EFF /* GameViewController.swift in Sources */,
+				99DC38352815B0C300035572 /* ResultsManager.swift in Sources */,
 				9921893C27B1C45F00E12EFF /* ViewController.swift in Sources */,
 				99CBBCC2280E2E4A006EEEE3 /* Difficulty.swift in Sources */,
 				995F08FE27B9116E00B188E0 /* SideObject.swift in Sources */,
@@ -278,6 +285,7 @@
 				993EF14C27B7F86B002B8B6D /* UIView+Utilities.swift in Sources */,
 				993ABD6127F9CF2F006DFECF /* SettingsViewController.swift in Sources */,
 				993EF14A27B7F44C002B8B6D /* UIColor+Hex.swift in Sources */,
+				9929DA422814B3B30038DF03 /* Result.swift in Sources */,
 				9921893827B1C45F00E12EFF /* AppDelegate.swift in Sources */,
 				9929DA402814A0A60038DF03 /* Constants.swift in Sources */,
 				99DC5E7E27E29BCD00493C9A /* ResourcesHelper.swift in Sources */,

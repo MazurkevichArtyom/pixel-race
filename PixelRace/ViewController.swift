@@ -22,12 +22,11 @@ class ViewController: UIViewController {
     }
     
     private func addTestButton() {
-        let button = UIButton(frame: CGRect(x: 40, y: view.bounds.height - 100, width: 50, height: 50))
+        let button = UIButton(frame: CGRect(x: 40, y: view.bounds.height - 100, width: 70, height: 50))
+        button.setTitle("Settings", for: .normal)
         button.backgroundColor = .blue
         button.addTarget(self, action: #selector(onTestButton), for: .touchUpInside)
         view.addSubview(button)
-        
-        let bar = UINavigationBar()
     }
     
     @objc private func onTestButton() {
