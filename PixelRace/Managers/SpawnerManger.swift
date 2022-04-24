@@ -14,7 +14,7 @@ class SpawnerManager {
     private var trafficCount = 0
     private var settings = Settings()
     private var startGameDate: Date?
-
+    
     private let collisionManager: CollisionManager
     private let gameViewController: UIViewController
     
@@ -72,7 +72,7 @@ class SpawnerManager {
     
     func startGameObjectSpawning() {
         startGameDate = Date()
-
+        
         startLaneSeparatorsSpawning()
         startSideObjectsSpawning()
         startTrafficFlowSpawning()
@@ -135,7 +135,7 @@ class SpawnerManager {
     
     private func restartTrafficFlowTimer() {
         trafficFlowTimer?.invalidate()
-        trafficFlowTimer = Timer.scheduledTimer(timeInterval: Double.random(in: 0.5...1.0), target: self, selector: #selector(animateTrafficObjects), userInfo: nil, repeats: false)
+        trafficFlowTimer = Timer.scheduledTimer(timeInterval: Double.random(in: 0.5...1.0) * difficultyCoefficient(), target: self, selector: #selector(animateTrafficObjects), userInfo: nil, repeats: false)
     }
     
     private func clearAllCachedData() {
@@ -185,8 +185,8 @@ class SpawnerManager {
         guard let leftLaneSeparator = generateLaneSeparator(side: .left),
               let rightLaneSeparator = generateLaneSeparator(side: .right),
               let endY = endYOfSideObjects else {
-                  return
-              }
+            return
+        }
         
         let leftLaneInitialCenter = leftLaneSeparator.center
         let rightLaneInitialCenter = rightLaneSeparator.center
@@ -215,13 +215,13 @@ class SpawnerManager {
     @objc private func animateTrafficObjects() {
         guard let vehicle = generateRandomTrafficObject(),
               let endY = endYOfTrafficObjects else {
-                  return
-              }
+            return
+        }
         
         let enemysCarInitialCenter = vehicle.center
         
         collisionManager.addObservableObject(observable: vehicle)
-        let duration = vehicle.accessibilityIdentifier == "truck" ? 2.3 : 2.0
+        let duration = (vehicle.accessibilityIdentifier == "truck" ? 2.3 : 2.0) * difficultyCoefficient()
         
         UIView.animate(withDuration: duration, delay: 0, options: .curveLinear) {
             vehicle.center = CGPoint(x: vehicle.center.x, y: endY)
@@ -250,11 +250,22 @@ class SpawnerManager {
         return generateTrafficObject(object: randomVehicle == 2 ? .truck : .car, lane: lane)
     }
     
+    private func difficultyCoefficient() -> Double {
+        switch settings.difficulty {
+        case .easy:
+            return 1.0
+        case .normal:
+            return 0.8
+        case .hard:
+            return 0.6
+        }
+    }
+    
     private func setupSide(side: Side) {
         guard let sideArea = sideAreaSize,
               let view = viewSize else {
-                  return
-              }
+            return
+        }
         
         let side = UIView(frame: CGRect(x: side == .left ? 0 : view.width - sideArea.width, y: 0, width: sideArea.width, height: sideArea.height))
         side.backgroundColor = K.Colors.sideColor
@@ -266,8 +277,8 @@ class SpawnerManager {
     private func setupLane(type: Lane) {
         guard let roadLane = roadLaneSize,
               let sideArea = sideAreaSize else {
-                  return
-              }
+            return
+        }
         
         var laneX: Double = 0
         
@@ -292,8 +303,8 @@ class SpawnerManager {
               let roadLane = roadLaneSize,
               let separateLine = separateLineSize,
               let view = viewSize else {
-                  return
-              }
+            return
+        }
         
         var lineX: Double = 0
         
@@ -316,8 +327,8 @@ class SpawnerManager {
               let roadLane = roadLaneSize,
               let view = viewSize,
               let car = carSize else {
-                  return
-              }
+            return
+        }
         
         let myCar = UIImageView(frame: CGRect(x: sideArea.width + roadLane.width + (roadLane.width - car.width) / 2.0 , y: view.height - view.height * 0.05 - car.height, width: car.width, height: car.height))
         myCar.contentMode = .scaleAspectFit
@@ -345,8 +356,8 @@ class SpawnerManager {
               let roadLane = roadLaneSize,
               let separateLine = separateLineSize,
               let startY = startYOfSideObjects else {
-                  return nil
-              }
+            return nil
+        }
         
         var lineX: Double = 0
         
@@ -370,8 +381,8 @@ class SpawnerManager {
     private func animateGeneratedSideObject(side: Side) {
         guard let sideObject = generateRandomSideObject(side: side),
               let endY = endYOfSideObjects else {
-                  return
-              }
+            return
+        }
         
         let sideObjectInitialCenter = sideObject.center
         
@@ -415,8 +426,8 @@ class SpawnerManager {
               let sideArea = sideAreaSize,
               let view = viewSize,
               let startY = startYOfSideObjects else {
-                  return nil
-              }
+            return nil
+        }
         
         var objectX: Double = 0
         
@@ -465,8 +476,8 @@ class SpawnerManager {
               let sideArea = sideAreaSize,
               let roadLane = roadLaneSize,
               let startY = startYOfTrafficObjects else {
-                  return nil
-              }
+            return nil
+        }
         
         var objectX: Double = 0
         
