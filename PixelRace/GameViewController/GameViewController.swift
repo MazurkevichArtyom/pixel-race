@@ -8,7 +8,6 @@
 import UIKit
 
 class GameViewController: UIViewController {
-    private var debugTimer: Timer?
     private var gameManager: GameManager?
     
     // Need to move all animations to GameManager
@@ -29,8 +28,7 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        debugTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(debugInfo), userInfo: nil, repeats: true)
-        
+
         guard let gameManager = gameManager else {
             return
         }
@@ -46,14 +44,10 @@ class GameViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
-        debugTimer?.invalidate()
     }
     
     @objc private func onSwipe(gesture: UISwipeGestureRecognizer) {
         movePlayersCar(direction: gesture.direction)
-    }
-    
-    @objc private func debugInfo() {
     }
     
     
