@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  PixelRace
+
+  Created by Artem Mazurkevich on 25.05.2022.
+  
+*/
+
+"settings_viewcontroller.title" = "SETTINGS";
+"settings_viewcontroller.select_car" = "SELECT CAR";
+"settings_viewcontroller.difficulty" = "DIFFICULTY";
+"leaderboard_viewcontroller.title" = "LEADERBOARD";
+"leaderboard_viewcontroller.car_section" = "CAR";
+"leaderboard_viewcontroller.score_section" = "SCORE";

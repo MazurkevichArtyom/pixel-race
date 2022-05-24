@@ -87,7 +87,7 @@ class SettingsViewController: UIViewController {
         let bar = CustomNavigationBar(leftItem: leftItem, rightItem: rightItem)
         
         bar.translatesAutoresizingMaskIntoConstraints = false
-        bar.setTitle(title: "SETTINGS")
+        bar.setTitle(title: Resources.Translates.leaderboardTitle)
         view.addSubview(bar)
         
         bar.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
@@ -108,7 +108,7 @@ class SettingsViewController: UIViewController {
         selectCarLabel.translatesAutoresizingMaskIntoConstraints = false
         selectCarLabel.font = UIFont(name: "PublicPixel", size: 16)
         selectCarLabel.textAlignment = .left
-        selectCarLabel.text = "SELECT CAR"
+        selectCarLabel.text = Resources.Translates.selectCarName
         view.addSubview(selectCarLabel)
         selectCarLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         selectCarLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
@@ -165,7 +165,7 @@ class SettingsViewController: UIViewController {
         difficultyLabel.translatesAutoresizingMaskIntoConstraints = false
         difficultyLabel.font = UIFont(name: "PublicPixel", size: 16)
         difficultyLabel.textAlignment = .left
-        difficultyLabel.text = "DIFFICULTY"
+        difficultyLabel.text = Resources.Translates.difficultyName
         view.addSubview(difficultyLabel)
         difficultyLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         difficultyLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
