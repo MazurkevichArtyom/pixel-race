@@ -24,7 +24,7 @@ class SettingsViewController: UIViewController {
     
     override func loadView() {
         let customView = UIView(frame: UIScreen.main.bounds)
-        customView.backgroundColor = K.Colors.mainBackgroundColor
+        customView.backgroundColor = Resources.Colors.mainBackgroundColor
         view = customView
         setupNavigationBar()
         setupSelectCarView()
@@ -252,13 +252,13 @@ class SettingsViewController: UIViewController {
     
     private func tryToSaveSettings() {
         let data = try? JSONEncoder().encode(settings)
-        UserDefaults.standard.set(data, forKey: K.Strings.settings)
+        UserDefaults.standard.set(data, forKey: Resources.Strings.settings)
         
         navigationController?.popViewController(animated: false)
     }
     
     private func tryToGetSettings() {
-        if let savedData = UserDefaults.standard.value(forKey: K.Strings.settings) as? Data {
+        if let savedData = UserDefaults.standard.value(forKey: Resources.Strings.settings) as? Data {
             if let savedSettings = try? JSONDecoder().decode(Settings.self, from: savedData) {
                 settings = savedSettings
             }

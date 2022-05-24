@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="30r-ZZ-l8U">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="30r-ZZ-l8U">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="PublicPixel.ttf">
-            <string>PublicPixel</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -21,12 +16,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="acp-xz-Gd3">
-                                <rect key="frame" x="165.5" y="417.5" width="83" height="135"/>
+                                <rect key="frame" x="103.5" y="381.5" width="207" height="207"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="acp-xz-Gd3" secondAttribute="height" multiplier="8:13" id="fXQ-0N-olx"/>
+                                    <constraint firstAttribute="width" secondItem="acp-xz-Gd3" secondAttribute="height" multiplier="1:1" id="fXQ-0N-olx"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="play"/>
+                                <buttonConfiguration key="configuration" style="plain" image="button_start"/>
                                 <connections>
                                     <action selector="onStartButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EYB-4l-9cw"/>
                                 </connections>
@@ -38,23 +33,43 @@
                                     <constraint firstAttribute="width" secondItem="as2-gT-BDz" secondAttribute="height" multiplier="379:150" id="EIA-cG-FF5"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="v1.0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZSR-vm-yfH">
-                                <rect key="frame" x="339" y="844" width="60" height="10"/>
-                                <fontDescription key="fontDescription" name="PublicPixel" family="Public Pixel" pointSize="10"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Itm-Fd-VFr">
+                                <rect key="frame" x="358" y="814" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Itm-Fd-VFr" secondAttribute="height" multiplier="1:1" id="N0D-fW-U2l"/>
+                                    <constraint firstAttribute="height" constant="40" id="hN2-Bj-Flc"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="button_settings"/>
+                                <connections>
+                                    <action selector="onSettingsButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wv7-Et-WnV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnh-rd-UJU">
+                                <rect key="frame" x="16" y="814" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="6B9-jl-3cY"/>
+                                    <constraint firstAttribute="width" secondItem="tnh-rd-UJU" secondAttribute="height" multiplier="1:1" id="Gxe-Cf-Djh"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="button_leaderboard"/>
+                                <connections>
+                                    <action selector="onLeaderboardButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Naw-u3-Ve9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.18039217590000001" green="0.18039217590000001" blue="0.18039217590000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="as2-gT-BDz" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="71k-Jz-9u0"/>
-                            <constraint firstItem="acp-xz-Gd3" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.2" id="9s7-xI-oS1"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ZSR-vm-yfH" secondAttribute="bottom" constant="8" id="EtP-lv-olz"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ZSR-vm-yfH" secondAttribute="trailing" constant="15" id="Lvs-Lc-sIK"/>
+                            <constraint firstItem="acp-xz-Gd3" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="9s7-xI-oS1"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Itm-Fd-VFr" secondAttribute="bottom" constant="8" id="Ahx-hg-MOa"/>
+                            <constraint firstItem="tnh-rd-UJU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Kgt-xM-fL3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Itm-Fd-VFr" secondAttribute="trailing" constant="16" id="Pw6-Es-hX0"/>
                             <constraint firstItem="acp-xz-Gd3" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" constant="10" id="abN-Xf-BzJ"/>
                             <constraint firstItem="as2-gT-BDz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="gkn-JS-Rqw"/>
                             <constraint firstItem="as2-gT-BDz" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="ild-Dm-g0q"/>
+                            <constraint firstItem="tnh-rd-UJU" firstAttribute="centerY" secondItem="Itm-Fd-VFr" secondAttribute="centerY" id="liS-rf-aRl"/>
                             <constraint firstItem="acp-xz-Gd3" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="tXR-L0-79I"/>
                         </constraints>
                     </view>
@@ -82,7 +97,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="play" width="80" height="130"/>
+        <image name="button_leaderboard" width="48" height="48"/>
+        <image name="button_settings" width="40" height="40"/>
+        <image name="button_start" width="184" height="184"/>
         <image name="title_flag" width="379" height="150"/>
     </resources>
 </document>

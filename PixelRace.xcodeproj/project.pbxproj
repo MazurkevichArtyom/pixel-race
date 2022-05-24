@@ -15,7 +15,7 @@
 		9921894127B1C45F00E12EFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9921894027B1C45F00E12EFF /* Assets.xcassets */; };
 		9921894427B1C45F00E12EFF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9921894227B1C45F00E12EFF /* LaunchScreen.storyboard */; };
 		9921894D27B1C48A00E12EFF /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9921894C27B1C48A00E12EFF /* GameViewController.swift */; };
-		9929DA402814A0A60038DF03 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9929DA3F2814A0A60038DF03 /* Constants.swift */; };
+		9929DA402814A0A60038DF03 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9929DA3F2814A0A60038DF03 /* Resources.swift */; };
 		9929DA422814B3B30038DF03 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9929DA412814B3B30038DF03 /* Result.swift */; };
 		993ABD6127F9CF2F006DFECF /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993ABD6027F9CF2F006DFECF /* SettingsViewController.swift */; };
 		993ABD6427FA0269006DFECF /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993ABD6327FA0269006DFECF /* CustomNavigationBar.swift */; };
@@ -47,7 +47,7 @@
 		9921894327B1C45F00E12EFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9921894527B1C45F00E12EFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9921894C27B1C48A00E12EFF /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		9929DA3F2814A0A60038DF03 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9929DA3F2814A0A60038DF03 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		9929DA412814B3B30038DF03 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		993ABD6027F9CF2F006DFECF /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		993ABD6327FA0269006DFECF /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
@@ -122,7 +122,7 @@
 				9921894027B1C45F00E12EFF /* Assets.xcassets */,
 				9921894227B1C45F00E12EFF /* LaunchScreen.storyboard */,
 				9921894527B1C45F00E12EFF /* Info.plist */,
-				9929DA3F2814A0A60038DF03 /* Constants.swift */,
+				9929DA3F2814A0A60038DF03 /* Resources.swift */,
 			);
 			path = PixelRace;
 			sourceTree = "<group>";
@@ -287,7 +287,7 @@
 				993EF14A27B7F44C002B8B6D /* UIColor+Hex.swift in Sources */,
 				9929DA422814B3B30038DF03 /* Result.swift in Sources */,
 				9921893827B1C45F00E12EFF /* AppDelegate.swift in Sources */,
-				9929DA402814A0A60038DF03 /* Constants.swift in Sources */,
+				9929DA402814A0A60038DF03 /* Resources.swift in Sources */,
 				99DC5E7E27E29BCD00493C9A /* ResourcesHelper.swift in Sources */,
 				9921893A27B1C45F00E12EFF /* SceneDelegate.swift in Sources */,
 				993ABD6427FA0269006DFECF /* CustomNavigationBar.swift in Sources */,

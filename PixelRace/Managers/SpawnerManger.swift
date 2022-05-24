@@ -98,7 +98,7 @@ class SpawnerManager {
     }
     
     private func tryToGetSettings() {
-        if let savedData = UserDefaults.standard.value(forKey: K.Strings.settings) as? Data {
+        if let savedData = UserDefaults.standard.value(forKey: Resources.Strings.settings) as? Data {
             if let savedSettings = try? JSONDecoder().decode(Settings.self, from: savedData) {
                 settings = savedSettings
             }
@@ -268,7 +268,7 @@ class SpawnerManager {
         }
         
         let side = UIView(frame: CGRect(x: side == .left ? 0 : view.width - sideArea.width, y: 0, width: sideArea.width, height: sideArea.height))
-        side.backgroundColor = K.Colors.sideColor
+        side.backgroundColor = Resources.Colors.sideColor
         side.isUserInteractionEnabled = false
         
         gameViewController.view.addSubview(side)
@@ -292,7 +292,7 @@ class SpawnerManager {
         }
         
         let lane = UIView(frame: CGRect(x: laneX, y: 0, width: roadLane.width, height: roadLane.height))
-        lane.backgroundColor = K.Colors.laneColor
+        lane.backgroundColor = Resources.Colors.laneColor
         lane.isUserInteractionEnabled = false
         
         gameViewController.view.addSubview(lane)
@@ -316,7 +316,7 @@ class SpawnerManager {
         }
         
         let line = UIView(frame: CGRect(x: lineX, y: 0, width: separateLine.width, height: view.height))
-        line.backgroundColor = K.Colors.sideSeparatorColor
+        line.backgroundColor = Resources.Colors.sideSeparatorColor
         line.isUserInteractionEnabled = false
         
         gameViewController.view.addSubview(line)
@@ -369,7 +369,7 @@ class SpawnerManager {
         }
         
         let laneSeparator = UIView(frame: CGRect(x: lineX, y: startY, width: separateLine.width, height: separateLine.height))
-        laneSeparator.backgroundColor = K.Colors.separateLineColor
+        laneSeparator.backgroundColor = Resources.Colors.separateLineColor
         laneSeparator.isUserInteractionEnabled = false
         
         gameViewController.view.addSubview(laneSeparator)

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct K {
+struct Resources {
     struct Strings {
         static let settings = "settings"
         static let resultFileName = "results"
