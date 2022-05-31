@@ -46,6 +46,17 @@ class ResultsManager {
         return nil
     }
     
+    static func clearResults() {
+        if let pathWithFileName = resultPath() {
+            if FileManager.default.fileExists(atPath: pathWithFileName.path) {
+                do {
+                    try FileManager.default.removeItem(atPath: pathWithFileName.path)
+                } catch {
+                }
+            }
+        }
+    }
+    
     private static func resultPath() -> URL? {
         if let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
             let pathWithFileName = directory.appendingPathComponent(Resources.Strings.resultFileName)

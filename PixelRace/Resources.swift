@@ -16,6 +16,8 @@ struct Resources {
     
     struct Colors {
         static let mainBackgroundColor = UIColor(hex: 0x2E2E2E)
+        static let mainTextColor = UIColor.white
+        static let secondaryTextColor = UIColor(hex: 0x878787)
         static let sideColor = UIColor(hex: 0x76AC1F)
         static let laneColor = UIColor(hex: 0xA0A0A0)
         static let sideSeparatorColor = UIColor(hex: 0x787878)

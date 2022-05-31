@@ -41,7 +41,7 @@ class LeaderboardTableViewCell: UITableViewCell {
         backgroundColor = Resources.Colors.mainBackgroundColor
         
         placeLabel.font = UIFont(name: "PublicPixel", size: 20)
-        placeLabel.textColor = .white
+        placeLabel.textColor = Resources.Colors.mainTextColor
         placeLabel.translatesAutoresizingMaskIntoConstraints = false
         placeLabel.textAlignment = .left
         contentView.addSubview(placeLabel)
@@ -59,7 +59,7 @@ class LeaderboardTableViewCell: UITableViewCell {
         carImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16).isActive = true
         
         scoreLabel.font = UIFont(name: "PublicPixel", size: 20)
-        scoreLabel.textColor = .white
+        scoreLabel.textColor = Resources.Colors.mainTextColor
         scoreLabel.textAlignment = .right
         scoreLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(scoreLabel)

@@ -45,7 +45,7 @@ class LeaderboardViewController: UIViewController {
         let leftItem = CustomNavigationBarItem(imageName: "button_back", itemAction: {
             self.navigationController?.popViewController(animated: false)
         })
-        let rightItem = CustomNavigationBarItem(imageName: "button_save", itemAction: tryToResetSavedResults)
+        let rightItem = CustomNavigationBarItem(imageName: "button_reset", itemAction: tryToResetSavedResults)
         let bar = CustomNavigationBar(leftItem: leftItem, rightItem: rightItem)
         
         bar.translatesAutoresizingMaskIntoConstraints = false
@@ -68,6 +68,7 @@ class LeaderboardViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorColor = UIColor(red: 0.279, green: 0.279, blue: 0.279, alpha: 1)
         tableView.separatorInset = UIEdgeInsets.zero
+        tableView.separatorInsetReference = .fromCellEdges
         tableView.allowsSelection = false
         tableView.sectionHeaderHeight = 72
         tableView.rowHeight = 72
@@ -89,8 +90,8 @@ class LeaderboardViewController: UIViewController {
         
         let placeLabel = UILabel()
         placeLabel.text = "#"
-        placeLabel.font = UIFont(name: "PublicPixel", size: 20)
-        placeLabel.textColor = .white
+        placeLabel.font = UIFont(name: "PublicPixel", size: 14)
+        placeLabel.textColor = Resources.Colors.secondaryTextColor
         placeLabel.translatesAutoresizingMaskIntoConstraints = false
         placeLabel.textAlignment = .left
         headerView.addSubview(placeLabel)
@@ -101,8 +102,8 @@ class LeaderboardViewController: UIViewController {
         
         let carLabel = UILabel()
         carLabel.text = "CAR"
-        carLabel.font = UIFont(name: "PublicPixel", size: 20)
-        carLabel.textColor = .white
+        carLabel.font = UIFont(name: "PublicPixel", size: 14)
+        carLabel.textColor = Resources.Colors.secondaryTextColor
         carLabel.translatesAutoresizingMaskIntoConstraints = false
         headerView.addSubview(carLabel)
         carLabel.textAlignment = .center
@@ -113,8 +114,8 @@ class LeaderboardViewController: UIViewController {
         
         let scoreLabel = UILabel()
         scoreLabel.text = "SCORE"
-        scoreLabel.font = UIFont(name: "PublicPixel", size: 20)
-        scoreLabel.textColor = .white
+        scoreLabel.font = UIFont(name: "PublicPixel", size: 14)
+        scoreLabel.textColor = Resources.Colors.secondaryTextColor
         scoreLabel.textAlignment = .right
         scoreLabel.translatesAutoresizingMaskIntoConstraints = false
         headerView.addSubview(scoreLabel)
@@ -127,7 +128,9 @@ class LeaderboardViewController: UIViewController {
     }
     
     private func tryToResetSavedResults() {
-        
+        ResultsManager.clearResults()
+        results = [Result]()
+        tableView.reloadData()
     }
     
     /*
