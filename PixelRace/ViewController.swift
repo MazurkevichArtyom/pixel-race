@@ -25,6 +25,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func onLeaderboardButton(_ sender: Any) {
+        let leaderboardVC = LeaderboardViewController()
+        navigationController?.pushViewController(leaderboardVC, animated: false)
     }
 }
 

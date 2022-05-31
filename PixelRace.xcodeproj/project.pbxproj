@@ -34,6 +34,8 @@
 		99CBBCC2280E2E4A006EEEE3 /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CBBCC1280E2E4A006EEEE3 /* Difficulty.swift */; };
 		99DC38352815B0C300035572 /* ResultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DC38342815B0C300035572 /* ResultsManager.swift */; };
 		99DC5E7E27E29BCD00493C9A /* ResourcesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DC5E7D27E29BCD00493C9A /* ResourcesHelper.swift */; };
+		99E2FA53284607AC00D10582 /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E2FA52284607AC00D10582 /* LeaderboardViewController.swift */; };
+		99E2FA5528460A0C00D10582 /* LeaderboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E2FA5428460A0C00D10582 /* LeaderboardTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +68,8 @@
 		99CBBCC1280E2E4A006EEEE3 /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
 		99DC38342815B0C300035572 /* ResultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsManager.swift; sourceTree = "<group>"; };
 		99DC5E7D27E29BCD00493C9A /* ResourcesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesHelper.swift; sourceTree = "<group>"; };
+		99E2FA52284607AC00D10582 /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
+		99E2FA5428460A0C00D10582 /* LeaderboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,7 @@
 		9921893627B1C45F00E12EFF /* PixelRace */ = {
 			isa = PBXGroup;
 			children = (
+				99E2FA512846076E00D10582 /* LeaderboardViewController */,
 				99CBBCBC280E261A006EEEE3 /* Models */,
 				993ABD6227FA0247006DFECF /* Views */,
 				993ABD5F27F9CEF6006DFECF /* SettingsViewController */,
@@ -202,6 +207,15 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		99E2FA512846076E00D10582 /* LeaderboardViewController */ = {
+			isa = PBXGroup;
+			children = (
+				99E2FA52284607AC00D10582 /* LeaderboardViewController.swift */,
+				99E2FA5428460A0C00D10582 /* LeaderboardTableViewCell.swift */,
+			);
+			path = LeaderboardViewController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -290,12 +304,14 @@
 				9929DA402814A0A60038DF03 /* Resources.swift in Sources */,
 				99DC5E7E27E29BCD00493C9A /* ResourcesHelper.swift in Sources */,
 				9921893A27B1C45F00E12EFF /* SceneDelegate.swift in Sources */,
+				99E2FA5528460A0C00D10582 /* LeaderboardTableViewCell.swift in Sources */,
 				993ABD6427FA0269006DFECF /* CustomNavigationBar.swift in Sources */,
 				995F090027B911EA00B188E0 /* TrafficObject.swift in Sources */,
 				995C282B27B47323004CF564 /* Move.swift in Sources */,
 				995C282827B46A80004CF564 /* GameManager.swift in Sources */,
 				99CBBCC0280E2D8D006EEEE3 /* Settings.swift in Sources */,
 				995C282D27B47908004CF564 /* Lane.swift in Sources */,
+				99E2FA53284607AC00D10582 /* LeaderboardViewController.swift in Sources */,
 				99CBBCBE280E262B006EEEE3 /* CustomNavigationBarItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
