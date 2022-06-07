@@ -10,13 +10,13 @@ import UIKit
 class LeaderboardTableViewCell: UITableViewCell {
     
     let placeLabel: UILabel
-    let carImage: UIImageView
+    let carImageView: UIImageView
     let scoreLabel: UILabel
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         placeLabel = UILabel()
         scoreLabel = UILabel()
-        carImage = UIImageView()
+        carImageView = UIImageView()
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupUI()
@@ -50,20 +50,20 @@ class LeaderboardTableViewCell: UITableViewCell {
         placeLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.2).isActive = true
         placeLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         
-        carImage.contentMode = .scaleAspectFit
-        carImage.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(carImage)
-        carImage.leadingAnchor.constraint(equalTo: placeLabel.trailingAnchor).isActive = true
-        carImage.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.2).isActive = true
-        carImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).isActive = true
-        carImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16).isActive = true
+        carImageView.contentMode = .scaleAspectFit
+        carImageView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(carImageView)
+        carImageView.leadingAnchor.constraint(equalTo: placeLabel.trailingAnchor).isActive = true
+        carImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.2).isActive = true
+        carImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).isActive = true
+        carImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16).isActive = true
         
         scoreLabel.font = UIFont(name: "PublicPixel", size: 20)
         scoreLabel.textColor = Resources.Colors.mainTextColor
         scoreLabel.textAlignment = .right
         scoreLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(scoreLabel)
-        scoreLabel.leadingAnchor.constraint(equalTo: carImage.trailingAnchor, constant: 8).isActive = true
+        scoreLabel.leadingAnchor.constraint(equalTo: carImageView.trailingAnchor, constant: 8).isActive = true
         scoreLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
         scoreLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -32).isActive = true
         scoreLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true

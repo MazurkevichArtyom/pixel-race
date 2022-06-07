@@ -22,5 +22,6 @@ struct Resources {
         static let laneColor = UIColor(hex: 0xA0A0A0)
         static let sideSeparatorColor = UIColor(hex: 0x787878)
         static let separateLineColor = UIColor.white
+        static let separatorColor = UIColor(hex: 0x474747)
     }
 }

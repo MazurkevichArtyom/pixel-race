@@ -18,6 +18,7 @@ class ResultsManager {
         }
         
         resultsArray.insert(result, at: 0)
+        resultsArray = resultsArray.sorted(by: {$0.trafficCount > $1.trafficCount})
         
         if resultsArray.count > maxCountOfResults {
             resultsArray.remove(at: resultsArray.count - 1)
@@ -29,6 +30,7 @@ class ResultsManager {
             do {
                 try data?.write(to: pathWithFileName)
             } catch {
+                print("Unexpected error: \(error).")
             }
         }
     }
@@ -52,6 +54,7 @@ class ResultsManager {
                 do {
                     try FileManager.default.removeItem(atPath: pathWithFileName.path)
                 } catch {
+                    print("Unexpected error: \(error).")
                 }
             }
         }

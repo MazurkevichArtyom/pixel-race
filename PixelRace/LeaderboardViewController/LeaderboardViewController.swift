@@ -66,7 +66,7 @@ class LeaderboardViewController: UIViewController {
         }
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.separatorColor = UIColor(red: 0.279, green: 0.279, blue: 0.279, alpha: 1)
+        tableView.separatorColor = Resources.Colors.separatorColor
         tableView.separatorInset = UIEdgeInsets.zero
         tableView.separatorInsetReference = .fromCellEdges
         tableView.allowsSelection = false
@@ -155,7 +155,7 @@ extension LeaderboardViewController : UITableViewDelegate, UITableViewDataSource
         let resultModel = results[indexPath.row]
         cell.placeLabel.text = "\(indexPath.row + 1)."
         cell.scoreLabel.text = String(resultModel.trafficCount)
-        cell.carImage.image = UIImage(named: ResourcesHelper.playersCarSkin(skinId: resultModel.playersCarSkinId))
+        cell.carImageView.image = UIImage(named: ResourcesHelper.playersCarSkin(skinId: resultModel.playersCarSkinId))
         return cell
     }
     
