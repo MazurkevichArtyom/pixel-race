@@ -91,7 +91,7 @@ class SpawnerManager {
     
     func gameResult() -> Result? {
         if let startDate = startGameDate {
-            return Result(difficulty: settings.difficulty, trafficCount: trafficCount, timeDuration: abs(startDate.timeIntervalSinceNow))
+            return Result(difficulty: settings.difficulty, playersCarSkinId: settings.skinId, trafficCount: trafficCount, timeDuration: abs(startDate.timeIntervalSinceNow))
         } else {
             return nil
         }

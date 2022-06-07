@@ -62,7 +62,7 @@ class CustomNavigationBar: UIView {
         }
         
         let label = UILabel()
-        label.textColor = .white
+        label.textColor = Resources.Colors.mainTextColor
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "PublicPixel", size: 18)
         label.textAlignment = .center

@@ -20,7 +20,8 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="acp-xz-Gd3" secondAttribute="height" multiplier="1:1" id="fXQ-0N-olx"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Button" image="button_start"/>
                                 <buttonConfiguration key="configuration" style="plain" image="button_start"/>
                                 <connections>
                                     <action selector="onStartButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EYB-4l-9cw"/>
@@ -39,8 +40,9 @@
                                     <constraint firstAttribute="width" secondItem="Itm-Fd-VFr" secondAttribute="height" multiplier="1:1" id="N0D-fW-U2l"/>
                                     <constraint firstAttribute="height" constant="40" id="hN2-Bj-Flc"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="button_settings"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="button_settings"/>
                                 <connections>
                                     <action selector="onSettingsButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wv7-Et-WnV"/>
                                 </connections>
@@ -51,8 +53,9 @@
                                     <constraint firstAttribute="height" constant="40" id="6B9-jl-3cY"/>
                                     <constraint firstAttribute="width" secondItem="tnh-rd-UJU" secondAttribute="height" multiplier="1:1" id="Gxe-Cf-Djh"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="button_leaderboard"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="button_leaderboard"/>
                                 <connections>
                                     <action selector="onLeaderboardButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Naw-u3-Ve9"/>
                                 </connections>
