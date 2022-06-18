@@ -14,6 +14,7 @@ class SpawnerManager {
     private var trafficCount = 0
     private var settings = Settings()
     private var startGameDate: Date?
+    lazy private var dateFormatter = DateFormatter()
     
     private let collisionManager: CollisionManager
     private let gameViewController: UIViewController
@@ -52,7 +53,7 @@ class SpawnerManager {
         self.collisionManager = collisionManager
         self.gameViewController = viewController
         self.cofigureObjectSizes(viewSize: gameViewController.view.frame.size)
-        
+        dateFormatter.dateFormat = "MM/dd\nyyyy"
         tryToGetSettings()
     }
     
@@ -91,7 +92,7 @@ class SpawnerManager {
     
     func gameResult() -> Result? {
         if let startDate = startGameDate {
-            return Result(difficulty: settings.difficulty, playersCarSkinId: settings.skinId, trafficCount: trafficCount, timeDuration: abs(startDate.timeIntervalSinceNow))
+            return Result(difficulty: settings.difficulty, playersCarSkinId: settings.skinId, trafficCount: trafficCount, date: dateFormatter.string(from: Date()), timeDuration: abs(startDate.timeIntervalSinceNow))
         } else {
             return nil
         }

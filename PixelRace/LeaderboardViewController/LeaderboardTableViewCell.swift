@@ -11,11 +11,13 @@ class LeaderboardTableViewCell: UITableViewCell {
     
     let placeLabel: UILabel
     let carImageView: UIImageView
+    let dateLabel: UILabel
     let scoreLabel: UILabel
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         placeLabel = UILabel()
         scoreLabel = UILabel()
+        dateLabel = UILabel()
         carImageView = UIImageView()
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -47,7 +49,7 @@ class LeaderboardTableViewCell: UITableViewCell {
         contentView.addSubview(placeLabel)
         placeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32).isActive = true
         placeLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
-        placeLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.2).isActive = true
+        placeLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.1).isActive = true
         placeLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         
         carImageView.contentMode = .scaleAspectFit
@@ -58,12 +60,23 @@ class LeaderboardTableViewCell: UITableViewCell {
         carImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).isActive = true
         carImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16).isActive = true
         
+        dateLabel.font = UIFont(name: "PublicPixel", size: 20)
+        dateLabel.textColor = Resources.Colors.mainTextColor
+        dateLabel.translatesAutoresizingMaskIntoConstraints = false
+        dateLabel.textAlignment = .center
+        dateLabel.numberOfLines = 2
+        contentView.addSubview(dateLabel)
+        dateLabel.leadingAnchor.constraint(equalTo: carImageView.trailingAnchor, constant: 8).isActive = true
+        dateLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
+        dateLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.3).isActive = true
+        dateLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        
         scoreLabel.font = UIFont(name: "PublicPixel", size: 20)
         scoreLabel.textColor = Resources.Colors.mainTextColor
         scoreLabel.textAlignment = .right
         scoreLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(scoreLabel)
-        scoreLabel.leadingAnchor.constraint(equalTo: carImageView.trailingAnchor, constant: 8).isActive = true
+        scoreLabel.leadingAnchor.constraint(equalTo: dateLabel.trailingAnchor, constant: 8).isActive = true
         scoreLabel.heightAnchor.constraint(equalTo: contentView.heightAnchor).isActive = true
         scoreLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -32).isActive = true
         scoreLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
