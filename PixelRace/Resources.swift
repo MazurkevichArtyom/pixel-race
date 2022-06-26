@@ -24,4 +24,13 @@ struct Resources {
         static let separateLineColor = UIColor.white
         static let separatorColor = UIColor(hex: 0x474747)
     }
+    
+    struct Translates {
+        static let settingsTitle = "settings_viewcontroller.title".localized()
+        static let selectCarName = "settings_viewcontroller.select_car".localized()
+        static let difficultyName = "settings_viewcontroller.difficulty".localized()
+        static let leaderboardTitle = "leaderboard_viewcontroller.title".localized()
+        static let carSectionName = "leaderboard_viewcontroller.car_section".localized()
+        static let scoreSectionName = "leaderboard_viewcontroller.score_section".localized()
+    }
 }

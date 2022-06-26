@@ -66,6 +66,7 @@ class CustomNavigationBar: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "PublicPixel", size: 18)
         label.textAlignment = .center
+        label.numberOfLines = 2
         addSubview(label)
         label.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1.0).isActive = true
         label.leadingAnchor.constraint(equalTo: leftButton.trailingAnchor).isActive = true
