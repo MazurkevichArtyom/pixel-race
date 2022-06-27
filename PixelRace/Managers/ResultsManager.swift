@@ -62,7 +62,7 @@ class ResultsManager {
     
     private static func resultPath() -> URL? {
         if let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            let pathWithFileName = directory.appendingPathComponent(Resources.Strings.resultFileName)
+            let pathWithFileName = directory.appendingPathComponent(Resources.UserDefaultsKeys.resultFileName)
             return pathWithFileName
         }
         

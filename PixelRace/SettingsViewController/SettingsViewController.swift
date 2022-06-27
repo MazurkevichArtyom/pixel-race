@@ -33,6 +33,9 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        AnalyticsManager.shared.logScreenEvent(screen: .settings, className: String(describing: self))
+        
         tryToGetSettings()
     }
     
@@ -252,13 +255,13 @@ class SettingsViewController: UIViewController {
     
     private func tryToSaveSettings() {
         let data = try? JSONEncoder().encode(settings)
-        UserDefaults.standard.set(data, forKey: Resources.Strings.settings)
+        UserDefaults.standard.set(data, forKey: Resources.UserDefaultsKeys.settings)
         
         navigationController?.popViewController(animated: false)
     }
     
     private func tryToGetSettings() {
-        if let savedData = UserDefaults.standard.value(forKey: Resources.Strings.settings) as? Data {
+        if let savedData = UserDefaults.standard.value(forKey: Resources.UserDefaultsKeys.settings) as? Data {
             if let savedSettings = try? JSONDecoder().decode(Settings.self, from: savedData) {
                 settings = savedSettings
             }

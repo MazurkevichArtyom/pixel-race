@@ -20,12 +20,15 @@
 		993ABD6427FA0269006DFECF /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993ABD6327FA0269006DFECF /* CustomNavigationBar.swift */; };
 		993EF14A27B7F44C002B8B6D /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993EF14927B7F44C002B8B6D /* UIColor+Hex.swift */; };
 		993EF14C27B7F86B002B8B6D /* UIView+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993EF14B27B7F86B002B8B6D /* UIView+Utilities.swift */; };
+		993F22C528689EBB0058146C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 993F22C428689EBB0058146C /* GoogleService-Info.plist */; };
 		995C282827B46A80004CF564 /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995C282727B46A80004CF564 /* GameManager.swift */; };
 		995C282B27B47323004CF564 /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995C282A27B47323004CF564 /* Move.swift */; };
 		995C282D27B47908004CF564 /* Lane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995C282C27B47908004CF564 /* Lane.swift */; };
 		995C282F27B47A03004CF564 /* Side.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995C282E27B47A03004CF564 /* Side.swift */; };
 		995F08FE27B9116E00B188E0 /* SideObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995F08FD27B9116E00B188E0 /* SideObject.swift */; };
 		995F090027B911EA00B188E0 /* TrafficObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995F08FF27B911EA00B188E0 /* TrafficObject.swift */; };
+		99C2DFE9286A5E0800BF6AED /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C2DFE8286A5E0800BF6AED /* AnalyticsManager.swift */; };
+		99C2DFEB286A5FEB00BF6AED /* AnalyticsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C2DFEA286A5FEB00BF6AED /* AnalyticsScreen.swift */; };
 		99C34F9127B605C600B21DBF /* SpawnerManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C34F9027B605C600B21DBF /* SpawnerManger.swift */; };
 		99C34F9627B60DF600B21DBF /* CollisionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C34F9527B60DF600B21DBF /* CollisionManager.swift */; };
 		99CBBCBE280E262B006EEEE3 /* CustomNavigationBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CBBCBD280E262B006EEEE3 /* CustomNavigationBarItem.swift */; };
@@ -38,9 +41,12 @@
 		99DC5E7E27E29BCD00493C9A /* ResourcesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DC5E7D27E29BCD00493C9A /* ResourcesHelper.swift */; };
 		99E2FA53284607AC00D10582 /* LeaderboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E2FA52284607AC00D10582 /* LeaderboardViewController.swift */; };
 		99E2FA5528460A0C00D10582 /* LeaderboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E2FA5428460A0C00D10582 /* LeaderboardTableViewCell.swift */; };
+		9BA4C2C398EAB5324E945E72 /* Pods_PixelRace.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70DB4B4CA49485D080325C25 /* Pods_PixelRace.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		70DB4B4CA49485D080325C25 /* Pods_PixelRace.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PixelRace.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B704EB35F54189498F66062 /* Pods-PixelRace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PixelRace.release.xcconfig"; path = "Target Support Files/Pods-PixelRace/Pods-PixelRace.release.xcconfig"; sourceTree = "<group>"; };
 		9921893427B1C45F00E12EFF /* PixelRace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PixelRace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9921893727B1C45F00E12EFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9921893927B1C45F00E12EFF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -56,12 +62,15 @@
 		993ABD6327FA0269006DFECF /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
 		993EF14927B7F44C002B8B6D /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		993EF14B27B7F86B002B8B6D /* UIView+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Utilities.swift"; sourceTree = "<group>"; };
+		993F22C428689EBB0058146C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		995C282727B46A80004CF564 /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		995C282A27B47323004CF564 /* Move.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
 		995C282C27B47908004CF564 /* Lane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lane.swift; sourceTree = "<group>"; };
 		995C282E27B47A03004CF564 /* Side.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Side.swift; sourceTree = "<group>"; };
 		995F08FD27B9116E00B188E0 /* SideObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideObject.swift; sourceTree = "<group>"; };
 		995F08FF27B911EA00B188E0 /* TrafficObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficObject.swift; sourceTree = "<group>"; };
+		99C2DFE8286A5E0800BF6AED /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
+		99C2DFEA286A5FEB00BF6AED /* AnalyticsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsScreen.swift; sourceTree = "<group>"; };
 		99C34F9027B605C600B21DBF /* SpawnerManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnerManger.swift; sourceTree = "<group>"; };
 		99C34F9527B60DF600B21DBF /* CollisionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionManager.swift; sourceTree = "<group>"; };
 		99CBBCBD280E262B006EEEE3 /* CustomNavigationBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBarItem.swift; sourceTree = "<group>"; };
@@ -75,6 +84,7 @@
 		99DC5E7D27E29BCD00493C9A /* ResourcesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesHelper.swift; sourceTree = "<group>"; };
 		99E2FA52284607AC00D10582 /* LeaderboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewController.swift; sourceTree = "<group>"; };
 		99E2FA5428460A0C00D10582 /* LeaderboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardTableViewCell.swift; sourceTree = "<group>"; };
+		9FB7965B99256211CE4E0CFF /* Pods-PixelRace.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PixelRace.debug.xcconfig"; path = "Target Support Files/Pods-PixelRace/Pods-PixelRace.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BA4C2C398EAB5324E945E72 /* Pods_PixelRace.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +113,8 @@
 				99D6A8F9283D8DC100FCDA99 /* Localizable.strings */,
 				9921893627B1C45F00E12EFF /* PixelRace */,
 				9921893527B1C45F00E12EFF /* Products */,
+				D84C326841370EE696764688 /* Pods */,
+				FFBE27AD945580C1559F3C72 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -128,6 +141,7 @@
 				9921894B27B1C46B00E12EFF /* GameViewController */,
 				9921893727B1C45F00E12EFF /* AppDelegate.swift */,
 				9921893927B1C45F00E12EFF /* SceneDelegate.swift */,
+				993F22C428689EBB0058146C /* GoogleService-Info.plist */,
 				9921893B27B1C45F00E12EFF /* ViewController.swift */,
 				9929DA3F2814A0A60038DF03 /* Resources.swift */,
 				9921893D27B1C45F00E12EFF /* Main.storyboard */,
@@ -179,6 +193,7 @@
 				99C34F9027B605C600B21DBF /* SpawnerManger.swift */,
 				99C34F9527B60DF600B21DBF /* CollisionManager.swift */,
 				99DC38342815B0C300035572 /* ResultsManager.swift */,
+				99C2DFE8286A5E0800BF6AED /* AnalyticsManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -192,6 +207,7 @@
 				995F08FD27B9116E00B188E0 /* SideObject.swift */,
 				995F08FF27B911EA00B188E0 /* TrafficObject.swift */,
 				99CBBCC1280E2E4A006EEEE3 /* Difficulty.swift */,
+				99C2DFEA286A5FEB00BF6AED /* AnalyticsScreen.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -223,6 +239,23 @@
 			path = LeaderboardViewController;
 			sourceTree = "<group>";
 		};
+		D84C326841370EE696764688 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9FB7965B99256211CE4E0CFF /* Pods-PixelRace.debug.xcconfig */,
+				8B704EB35F54189498F66062 /* Pods-PixelRace.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		FFBE27AD945580C1559F3C72 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				70DB4B4CA49485D080325C25 /* Pods_PixelRace.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -230,9 +263,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9921894827B1C45F00E12EFF /* Build configuration list for PBXNativeTarget "PixelRace" */;
 			buildPhases = (
+				914215EDEB1293D41EC5A194 /* [CP] Check Pods Manifest.lock */,
 				9921893027B1C45F00E12EFF /* Sources */,
 				9921893127B1C45F00E12EFF /* Frameworks */,
 				9921893227B1C45F00E12EFF /* Resources */,
+				820DE5BE170B59B0777A0F00 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -287,16 +322,60 @@
 				9921894427B1C45F00E12EFF /* LaunchScreen.storyboard in Resources */,
 				9921894127B1C45F00E12EFF /* Assets.xcassets in Resources */,
 				9921893F27B1C45F00E12EFF /* Main.storyboard in Resources */,
+				993F22C528689EBB0058146C /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		820DE5BE170B59B0777A0F00 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PixelRace/Pods-PixelRace-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PixelRace/Pods-PixelRace-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PixelRace/Pods-PixelRace-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		914215EDEB1293D41EC5A194 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PixelRace-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9921893027B1C45F00E12EFF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99C2DFE9286A5E0800BF6AED /* AnalyticsManager.swift in Sources */,
 				9921894D27B1C48A00E12EFF /* GameViewController.swift in Sources */,
 				99DC38352815B0C300035572 /* ResultsManager.swift in Sources */,
 				9921893C27B1C45F00E12EFF /* ViewController.swift in Sources */,
@@ -310,6 +389,7 @@
 				993EF14A27B7F44C002B8B6D /* UIColor+Hex.swift in Sources */,
 				9929DA422814B3B30038DF03 /* Result.swift in Sources */,
 				9921893827B1C45F00E12EFF /* AppDelegate.swift in Sources */,
+				99C2DFEB286A5FEB00BF6AED /* AnalyticsScreen.swift in Sources */,
 				9929DA402814A0A60038DF03 /* Resources.swift in Sources */,
 				99DC5E7E27E29BCD00493C9A /* ResourcesHelper.swift in Sources */,
 				9921893A27B1C45F00E12EFF /* SceneDelegate.swift in Sources */,
@@ -477,6 +557,7 @@
 		};
 		9921894927B1C45F00E12EFF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9FB7965B99256211CE4E0CFF /* Pods-PixelRace.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -485,6 +566,7 @@
 				DEVELOPMENT_TEAM = 6R3NRG42L4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PixelRace/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Pixel Race";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -498,7 +580,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = tms.PixelRace;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tms.pixelrace;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -508,6 +590,7 @@
 		};
 		9921894A27B1C45F00E12EFF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B704EB35F54189498F66062 /* Pods-PixelRace.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -516,6 +599,7 @@
 				DEVELOPMENT_TEAM = 6R3NRG42L4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PixelRace/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Pixel Race";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -529,7 +613,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = tms.PixelRace;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tms.pixelrace;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

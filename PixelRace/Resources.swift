@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 struct Resources {
-    struct Strings {
+    struct UserDefaultsKeys {
         static let settings = "settings"
         static let resultFileName = "results"
     }

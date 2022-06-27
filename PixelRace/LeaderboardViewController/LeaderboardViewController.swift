@@ -25,10 +25,11 @@ class LeaderboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        AnalyticsManager.shared.logScreenEvent(screen: .leaderboard, className: String(describing: self))
+        
         if let savedResults = ResultsManager.savedResults() {
             results = savedResults.sorted(by: {$0.trafficCount > $1.trafficCount})
         }
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {

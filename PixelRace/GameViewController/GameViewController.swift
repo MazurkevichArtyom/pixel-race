@@ -27,8 +27,9 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-
+        
+        AnalyticsManager.shared.logScreenEvent(screen: .game, className: String(describing: self))
+        
         guard let gameManager = gameManager else {
             return
         }

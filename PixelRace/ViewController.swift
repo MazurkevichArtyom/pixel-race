@@ -8,12 +8,12 @@
 import UIKit
 
 class ViewController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        AnalyticsManager.shared.logScreenEvent(screen: .main, className: String(describing: self))
     }
-
+    
     @IBAction func onStartButton(_ sender: Any) {
         let gameVC = GameViewController()
         navigationController?.pushViewController(gameVC, animated: false)

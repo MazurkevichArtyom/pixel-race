@@ -98,7 +98,7 @@ class SpawnerManager {
     }
     
     private func tryToGetSettings() {
-        if let savedData = UserDefaults.standard.value(forKey: Resources.Strings.settings) as? Data {
+        if let savedData = UserDefaults.standard.value(forKey: Resources.UserDefaultsKeys.settings) as? Data {
             if let savedSettings = try? JSONDecoder().decode(Settings.self, from: savedData) {
                 settings = savedSettings
             }
