@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAnalytics
 
 class GameViewController: UIViewController {
     private var gameManager: GameManager?
@@ -27,7 +28,11 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        Analytics.logEvent(AnalyticsEventScreenView, parameters: [
+            AnalyticsParameterScreenName: Resources.ScreenNames.game,
+            AnalyticsParameterScreenClass: String(describing: self)
+        ])
 
         guard let gameManager = gameManager else {
             return

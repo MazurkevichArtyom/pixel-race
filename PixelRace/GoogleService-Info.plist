@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>825627770651-g8qbb9pubr41kpob3hs1avaeirg4h0cs.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.825627770651-g8qbb9pubr41kpob3hs1avaeirg4h0cs</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA_F00HHkWUbx5NDCdde6ir9ZvTWJP-1_g</string>
+	<key>GCM_SENDER_ID</key>
+	<string>825627770651</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.tms.pixelrace</string>
+	<key>PROJECT_ID</key>
+	<string>pixelrace-a3846</string>
+	<key>STORAGE_BUCKET</key>
+	<string>pixelrace-a3846.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:825627770651:ios:2839698b9aa9133a81ddbe</string>
+</dict>
+</plist>

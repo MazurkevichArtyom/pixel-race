@@ -9,7 +9,14 @@ import Foundation
 import UIKit
 
 struct Resources {
-    struct Strings {
+    struct ScreenNames {
+        static let main = "Main"
+        static let settings = "Settings"
+        static let leaderboard = "LeaderBoard"
+        static let game = "Game"
+    }
+    
+    struct UserDefaultsKeys {
         static let settings = "settings"
         static let resultFileName = "results"
     }

@@ -6,12 +6,17 @@
 //
 
 import UIKit
+import FirebaseAnalytics
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        Analytics.logEvent(AnalyticsEventScreenView, parameters: [
+            AnalyticsParameterScreenName: Resources.ScreenNames.main,
+            AnalyticsParameterScreenClass: String(describing: self)
+        ])
     }
 
     @IBAction func onStartButton(_ sender: Any) {
