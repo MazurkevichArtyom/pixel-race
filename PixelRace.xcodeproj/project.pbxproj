@@ -27,6 +27,8 @@
 		995C282F27B47A03004CF564 /* Side.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995C282E27B47A03004CF564 /* Side.swift */; };
 		995F08FE27B9116E00B188E0 /* SideObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995F08FD27B9116E00B188E0 /* SideObject.swift */; };
 		995F090027B911EA00B188E0 /* TrafficObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995F08FF27B911EA00B188E0 /* TrafficObject.swift */; };
+		99C2DFE9286A5E0800BF6AED /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C2DFE8286A5E0800BF6AED /* AnalyticsManager.swift */; };
+		99C2DFEB286A5FEB00BF6AED /* AnalyticsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C2DFEA286A5FEB00BF6AED /* AnalyticsScreen.swift */; };
 		99C34F9127B605C600B21DBF /* SpawnerManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C34F9027B605C600B21DBF /* SpawnerManger.swift */; };
 		99C34F9627B60DF600B21DBF /* CollisionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C34F9527B60DF600B21DBF /* CollisionManager.swift */; };
 		99CBBCBE280E262B006EEEE3 /* CustomNavigationBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99CBBCBD280E262B006EEEE3 /* CustomNavigationBarItem.swift */; };
@@ -67,6 +69,8 @@
 		995C282E27B47A03004CF564 /* Side.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Side.swift; sourceTree = "<group>"; };
 		995F08FD27B9116E00B188E0 /* SideObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideObject.swift; sourceTree = "<group>"; };
 		995F08FF27B911EA00B188E0 /* TrafficObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrafficObject.swift; sourceTree = "<group>"; };
+		99C2DFE8286A5E0800BF6AED /* AnalyticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
+		99C2DFEA286A5FEB00BF6AED /* AnalyticsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsScreen.swift; sourceTree = "<group>"; };
 		99C34F9027B605C600B21DBF /* SpawnerManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnerManger.swift; sourceTree = "<group>"; };
 		99C34F9527B60DF600B21DBF /* CollisionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionManager.swift; sourceTree = "<group>"; };
 		99CBBCBD280E262B006EEEE3 /* CustomNavigationBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBarItem.swift; sourceTree = "<group>"; };
@@ -189,6 +193,7 @@
 				99C34F9027B605C600B21DBF /* SpawnerManger.swift */,
 				99C34F9527B60DF600B21DBF /* CollisionManager.swift */,
 				99DC38342815B0C300035572 /* ResultsManager.swift */,
+				99C2DFE8286A5E0800BF6AED /* AnalyticsManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -202,6 +207,7 @@
 				995F08FD27B9116E00B188E0 /* SideObject.swift */,
 				995F08FF27B911EA00B188E0 /* TrafficObject.swift */,
 				99CBBCC1280E2E4A006EEEE3 /* Difficulty.swift */,
+				99C2DFEA286A5FEB00BF6AED /* AnalyticsScreen.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -239,7 +245,6 @@
 				9FB7965B99256211CE4E0CFF /* Pods-PixelRace.debug.xcconfig */,
 				8B704EB35F54189498F66062 /* Pods-PixelRace.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -370,6 +375,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99C2DFE9286A5E0800BF6AED /* AnalyticsManager.swift in Sources */,
 				9921894D27B1C48A00E12EFF /* GameViewController.swift in Sources */,
 				99DC38352815B0C300035572 /* ResultsManager.swift in Sources */,
 				9921893C27B1C45F00E12EFF /* ViewController.swift in Sources */,
@@ -383,6 +389,7 @@
 				993EF14A27B7F44C002B8B6D /* UIColor+Hex.swift in Sources */,
 				9929DA422814B3B30038DF03 /* Result.swift in Sources */,
 				9921893827B1C45F00E12EFF /* AppDelegate.swift in Sources */,
+				99C2DFEB286A5FEB00BF6AED /* AnalyticsScreen.swift in Sources */,
 				9929DA402814A0A60038DF03 /* Resources.swift in Sources */,
 				99DC5E7E27E29BCD00493C9A /* ResourcesHelper.swift in Sources */,
 				9921893A27B1C45F00E12EFF /* SceneDelegate.swift in Sources */,

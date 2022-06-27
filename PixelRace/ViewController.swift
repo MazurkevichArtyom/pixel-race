@@ -6,19 +6,14 @@
 //
 
 import UIKit
-import FirebaseAnalytics
 
 class ViewController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Analytics.logEvent(AnalyticsEventScreenView, parameters: [
-            AnalyticsParameterScreenName: Resources.ScreenNames.main,
-            AnalyticsParameterScreenClass: String(describing: self)
-        ])
+        AnalyticsManager.shared.logScreenEvent(screen: .main, className: String(describing: self))
     }
-
+    
     @IBAction func onStartButton(_ sender: Any) {
         let gameVC = GameViewController()
         navigationController?.pushViewController(gameVC, animated: false)

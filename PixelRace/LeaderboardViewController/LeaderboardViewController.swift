@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAnalytics
 
 class LeaderboardViewController: UIViewController {
     
@@ -26,10 +25,7 @@ class LeaderboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Analytics.logEvent(AnalyticsEventScreenView, parameters: [
-            AnalyticsParameterScreenName: Resources.ScreenNames.leaderboard,
-            AnalyticsParameterScreenClass: String(describing: self)
-        ])
+        AnalyticsManager.shared.logScreenEvent(screen: .leaderboard, className: String(describing: self))
         
         if let savedResults = ResultsManager.savedResults() {
             results = savedResults.sorted(by: {$0.trafficCount > $1.trafficCount})

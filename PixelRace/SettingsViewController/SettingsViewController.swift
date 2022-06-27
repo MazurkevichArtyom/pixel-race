@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAnalytics
 
 class SettingsViewController: UIViewController {
     
@@ -35,10 +34,7 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Analytics.logEvent(AnalyticsEventScreenView, parameters: [
-            AnalyticsParameterScreenName: Resources.ScreenNames.settings,
-            AnalyticsParameterScreenClass: String(describing: self)
-        ])
+        AnalyticsManager.shared.logScreenEvent(screen: .settings, className: String(describing: self))
         
         tryToGetSettings()
     }
