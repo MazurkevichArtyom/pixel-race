@@ -41,9 +41,13 @@ class SpawnerManager {
     private var leftSideItemsTimer: Timer?
     private var rightSideItemsTimer: Timer?
     private var trafficFlowTimer: Timer?
+    private var middleRoadEffectsTimer: Timer?
+    private var leftRoadEffectsTimer: Timer?
+    private var rightRoadEffectsTimer: Timer?
     
     private var cachedCivilCars: [Lane: [UIImageView]] = [.left: [UIImageView](), .middle: [UIImageView](), .right: [UIImageView]()]
     private var cachedTrucks: [Lane: [UIImageView]] = [.left: [UIImageView](), .middle: [UIImageView](), .right: [UIImageView]()]
+    private var cachedRoadEffects: [Lane: [UIView]] = [.left: [UIView](), .middle: [UIView](), .right: [UIView]()]
     private var cachedTrees: [Side: [UIImageView]] = [.left: [UIImageView](), .right :[UIImageView]()]
     private var cachedBushes: [Side: [UIImageView]] = [.left: [UIImageView](), .right :[UIImageView]()]
     private var cachedRoadSignes: [Side: [UIImageView]] = [.left: [UIImageView](), .right :[UIImageView]()]
@@ -77,6 +81,7 @@ class SpawnerManager {
         startLaneSeparatorsSpawning()
         startSideObjectsSpawning()
         startTrafficFlowSpawning()
+        startRoadEffectsSpawning()
     }
     
     func invalidate() {
@@ -84,6 +89,9 @@ class SpawnerManager {
         leftSideItemsTimer?.invalidate()
         rightSideItemsTimer?.invalidate()
         trafficFlowTimer?.invalidate()
+        middleRoadEffectsTimer?.invalidate()
+        leftRoadEffectsTimer?.invalidate()
+        rightRoadEffectsTimer?.invalidate()
         
         gameViewController.view.layer.removeAllAnimations()
         
@@ -119,6 +127,12 @@ class SpawnerManager {
         restartTrafficFlowTimer()
     }
     
+    private func startRoadEffectsSpawning() {
+        restartMiddleRoadEffectsTimer();
+        restartLeftRoadEffectsTimer();
+        restartRightRoadEffectsTimer();
+    }
+    
     private func restartLaneSeparatorsTimer() {
         laneSeparatorsTimer?.invalidate()
         laneSeparatorsTimer = Timer.scheduledTimer(timeInterval: 0.7, target: self, selector: #selector(animateLaneSeparators), userInfo: nil, repeats: true)
@@ -137,6 +151,21 @@ class SpawnerManager {
     private func restartTrafficFlowTimer() {
         trafficFlowTimer?.invalidate()
         trafficFlowTimer = Timer.scheduledTimer(timeInterval: Double.random(in: 0.5...1.0) * difficultyCoefficient(), target: self, selector: #selector(animateTrafficObjects), userInfo: nil, repeats: false)
+    }
+    
+    private func restartMiddleRoadEffectsTimer() {
+        middleRoadEffectsTimer?.invalidate()
+        middleRoadEffectsTimer = Timer.scheduledTimer(timeInterval: Double.random(in: 0.1...0.4), target: self, selector: #selector(animateMiddleRoadEffects), userInfo: nil, repeats: false)
+    }
+    
+    private func restartLeftRoadEffectsTimer() {
+        leftRoadEffectsTimer?.invalidate()
+        leftRoadEffectsTimer = Timer.scheduledTimer(timeInterval: Double.random(in: 0.1...0.4), target: self, selector: #selector(animateLeftRoadEffects), userInfo: nil, repeats: false)
+    }
+    
+    private func restartRightRoadEffectsTimer() {
+        rightRoadEffectsTimer?.invalidate()
+        rightRoadEffectsTimer = Timer.scheduledTimer(timeInterval: Double.random(in: 0.1...0.4), target: self, selector: #selector(animateRightRoadEffects), userInfo: nil, repeats: false)
     }
     
     private func clearAllCachedData() {
@@ -179,6 +208,14 @@ class SpawnerManager {
         }
         
         cachedLaneSeparators = [.left: [UIView](), .right :[UIView]()]
+        
+        for item in cachedRoadEffects {
+            for objects in item.value {
+                objects.removeFromSuperview()
+            }
+        }
+        
+        cachedRoadEffects = [.left: [UIView](), .middle: [UIView](), .right: [UIView]()]
     }
     
     @objc private func animateLaneSeparators() {
@@ -234,6 +271,21 @@ class SpawnerManager {
         }
         
         restartTrafficFlowTimer()
+    }
+    
+    @objc private func animateMiddleRoadEffects() {
+        animateRoadEffect(lane: .middle)
+        restartMiddleRoadEffectsTimer()
+    }
+    
+    @objc private func animateLeftRoadEffects() {
+        animateRoadEffect(lane: .left)
+        restartLeftRoadEffectsTimer()
+    }
+    
+    @objc private func animateRightRoadEffects() {
+        animateRoadEffect(lane: .right)
+        restartRightRoadEffectsTimer()
     }
     
     func generateRandomTrafficObject() -> UIImageView? {
@@ -395,6 +447,22 @@ class SpawnerManager {
         }
     }
     
+    private func animateRoadEffect(lane: Lane) {
+        guard let roadEffect = generateRoadEffect(lane: lane),
+              let endY = endYOfSideObjects else {
+            return
+        }
+        
+        let roadEffectInitialCenter = roadEffect.center
+        
+        UIView.animate(withDuration: staticObjectDuration, delay: 0, options: .curveLinear) {
+            roadEffect.center = CGPoint(x: roadEffect.center.x , y: endY)
+        } completion: { finish in
+            roadEffect.center = roadEffectInitialCenter
+            roadEffect.isHidden = true
+        }
+    }
+    
     private func generateRandomSideObject(side: Side) -> UIImageView? {
         let randomItem = Int.random(in: 0...5)
         
@@ -511,6 +579,46 @@ class SpawnerManager {
         }
         
         return imageView
+    }
+    
+    private func generateRoadEffect(lane: Lane) -> UIView? {
+        guard let sideArea = sideAreaSize,
+              let roadLane = roadLaneSize,
+              let separateLine = separateLineSize,
+              let startY = startYOfSideObjects else {
+            return nil
+        }
+        
+        var effectX: Double = 0
+        
+        switch lane {
+        case .left:
+            effectX = Double.random(in: (sideArea.width + separateLine.width / 2.0)...(sideArea.width + roadLane.width - separateLine.width / 2.0))
+        case .middle:
+            effectX = Double.random(in: (sideArea.width + roadLane.width + separateLine.width / 2.0)...(sideArea.width + 2 * roadLane.width - separateLine.width / 2.0))
+        case .right:
+            effectX = Double.random(in: (sideArea.width + 2 * roadLane.width + separateLine.width / 2.0)...(sideArea.width + 3 * roadLane.width - separateLine.width))
+        }
+        
+        if let createdEffect = cachedRoadEffects[lane]?.first(where: { view in
+            return view.isHidden
+        })
+        {
+            createdEffect.frame.origin.x = effectX
+            createdEffect.isHidden = false
+            return createdEffect
+        }
+        
+        
+        
+        let roadEffect = UIView(frame: CGRect(x: effectX, y: startY, width: 6, height: 6))
+        roadEffect.backgroundColor = Int.random(in: 0...9) % 2 == 0 ? Resources.Colors.roadEffectColor2 : Resources.Colors.roadEffectColor1
+        roadEffect.isUserInteractionEnabled = false
+        
+        gameViewController.view.addSubview(roadEffect)
+        cachedRoadEffects[lane]?.append(roadEffect)
+        
+        return roadEffect
     }
     
     private func cachedSideObject(object: SideObject, side: Side) -> UIImageView? {

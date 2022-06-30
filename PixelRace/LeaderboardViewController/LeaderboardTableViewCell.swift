@@ -42,7 +42,7 @@ class LeaderboardTableViewCell: UITableViewCell {
     private func setupUI() {
         backgroundColor = Resources.Colors.mainBackgroundColor
         
-        placeLabel.font = UIFont(name: "PublicPixel", size: 20)
+        placeLabel.font = UIFont(name: "PublicPixel", size: 12)
         placeLabel.textColor = Resources.Colors.mainTextColor
         placeLabel.translatesAutoresizingMaskIntoConstraints = false
         placeLabel.textAlignment = .left
@@ -60,7 +60,7 @@ class LeaderboardTableViewCell: UITableViewCell {
         carImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).isActive = true
         carImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16).isActive = true
         
-        dateLabel.font = UIFont(name: "PublicPixel", size: 20)
+        dateLabel.font = UIFont(name: "PublicPixel", size: 12)
         dateLabel.textColor = Resources.Colors.mainTextColor
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
         dateLabel.textAlignment = .center
@@ -71,7 +71,7 @@ class LeaderboardTableViewCell: UITableViewCell {
         dateLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.3).isActive = true
         dateLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         
-        scoreLabel.font = UIFont(name: "PublicPixel", size: 20)
+        scoreLabel.font = UIFont(name: "PublicPixel", size: 12)
         scoreLabel.textColor = Resources.Colors.mainTextColor
         scoreLabel.textAlignment = .right
         scoreLabel.translatesAutoresizingMaskIntoConstraints = false
