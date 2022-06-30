@@ -98,7 +98,7 @@ class LeaderboardViewController: UIViewController {
         headerView.addSubview(placeLabel)
         placeLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 32).isActive = true
         placeLabel.heightAnchor.constraint(equalTo: headerView.heightAnchor).isActive = true
-        placeLabel.widthAnchor.constraint(equalTo: headerView.widthAnchor, multiplier: 0.2).isActive = true
+        placeLabel.widthAnchor.constraint(equalTo: headerView.widthAnchor, multiplier: 0.1).isActive = true
         placeLabel.topAnchor.constraint(equalTo: headerView.topAnchor).isActive = true
         
         let carLabel = UILabel()
@@ -113,6 +113,18 @@ class LeaderboardViewController: UIViewController {
         carLabel.widthAnchor.constraint(equalTo: headerView.widthAnchor, multiplier: 0.2).isActive = true
         carLabel.topAnchor.constraint(equalTo: headerView.topAnchor).isActive = true
         
+        let dateLabel = UILabel()
+        dateLabel.text = "DATE"
+        dateLabel.font = UIFont(name: "PublicPixel", size: 14)
+        dateLabel.textColor = Resources.Colors.secondaryTextColor
+        dateLabel.translatesAutoresizingMaskIntoConstraints = false
+        headerView.addSubview(dateLabel)
+        dateLabel.textAlignment = .center
+        dateLabel.leadingAnchor.constraint(equalTo: carLabel.trailingAnchor, constant: 8).isActive = true
+        dateLabel.heightAnchor.constraint(equalTo: headerView.heightAnchor).isActive = true
+        dateLabel.widthAnchor.constraint(equalTo: headerView.widthAnchor, multiplier: 0.3).isActive = true
+        dateLabel.topAnchor.constraint(equalTo: headerView.topAnchor).isActive = true
+        
         let scoreLabel = UILabel()
         scoreLabel.text = "SCORE"
         scoreLabel.font = UIFont(name: "PublicPixel", size: 14)
@@ -120,7 +132,7 @@ class LeaderboardViewController: UIViewController {
         scoreLabel.textAlignment = .right
         scoreLabel.translatesAutoresizingMaskIntoConstraints = false
         headerView.addSubview(scoreLabel)
-        scoreLabel.leadingAnchor.constraint(equalTo: carLabel.trailingAnchor, constant: 8).isActive = true
+        scoreLabel.leadingAnchor.constraint(equalTo: dateLabel.trailingAnchor, constant: 8).isActive = true
         scoreLabel.heightAnchor.constraint(equalTo: headerView.heightAnchor).isActive = true
         scoreLabel.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -32).isActive = true
         scoreLabel.topAnchor.constraint(equalTo: headerView.topAnchor).isActive = true
@@ -156,6 +168,7 @@ extension LeaderboardViewController : UITableViewDelegate, UITableViewDataSource
         let resultModel = results[indexPath.row]
         cell.placeLabel.text = "\(indexPath.row + 1)."
         cell.scoreLabel.text = String(resultModel.trafficCount)
+        cell.dateLabel.text = resultModel.date
         cell.carImageView.image = UIImage(named: ResourcesHelper.playersCarSkin(skinId: resultModel.playersCarSkinId))
         return cell
     }
