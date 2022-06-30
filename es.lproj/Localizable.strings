@@ -12,3 +12,4 @@
 "leaderboard_viewcontroller.title" = "TABLA DE CLASIFICACIÓN";
 "leaderboard_viewcontroller.car_section" = "COCHE";
 "leaderboard_viewcontroller.score_section" = "PUNTAJE";
+"leaderboard_viewcontroller.date_section" = "FECHA";

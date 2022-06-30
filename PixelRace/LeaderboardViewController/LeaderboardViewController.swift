@@ -114,7 +114,7 @@ class LeaderboardViewController: UIViewController {
         carLabel.topAnchor.constraint(equalTo: headerView.topAnchor).isActive = true
         
         let dateLabel = UILabel()
-        dateLabel.text = "DATE"
+        dateLabel.text = Resources.Translates.dateSectionName
         dateLabel.font = UIFont(name: "PublicPixel", size: 14)
         dateLabel.textColor = Resources.Colors.secondaryTextColor
         dateLabel.translatesAutoresizingMaskIntoConstraints = false

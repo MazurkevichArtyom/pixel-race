@@ -12,3 +12,4 @@
 "leaderboard_viewcontroller.title" = "LEADERBOARD";
 "leaderboard_viewcontroller.car_section" = "CAR";
 "leaderboard_viewcontroller.score_section" = "SCORE";
+"leaderboard_viewcontroller.date_section" = "DATE";

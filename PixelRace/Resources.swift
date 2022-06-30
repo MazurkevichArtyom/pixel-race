@@ -36,5 +36,6 @@ struct Resources {
         static let leaderboardTitle = "leaderboard_viewcontroller.title".localized()
         static let carSectionName = "leaderboard_viewcontroller.car_section".localized()
         static let scoreSectionName = "leaderboard_viewcontroller.score_section".localized()
+        static let dateSectionName = "leaderboard_viewcontroller.date_section".localized()
     }
 }
