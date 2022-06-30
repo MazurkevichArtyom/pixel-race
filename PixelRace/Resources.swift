@@ -25,6 +25,8 @@ struct Resources {
         static let separatorColor = UIColor(hex: 0x474747)
         static let roadEffectColor1 = UIColor(hex: 0x939393)
         static let roadEffectColor2 = UIColor(hex: 0xB0B0B0)
+        static let sideEffectColor1 = UIColor(hex: 0x609E1B)
+        static let sideEffectColor2 = UIColor(hex: 0x85C526)
     }
     
     struct Translates {

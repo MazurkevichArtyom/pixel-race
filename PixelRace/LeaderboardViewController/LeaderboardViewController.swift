@@ -50,7 +50,7 @@ class LeaderboardViewController: UIViewController {
         let bar = CustomNavigationBar(leftItem: leftItem, rightItem: rightItem)
         
         bar.translatesAutoresizingMaskIntoConstraints = false
-        bar.setTitle(title: "LEADERBOARD")
+        bar.setTitle(title: Resources.Translates.leaderboardTitle)
         view.addSubview(bar)
         
         bar.widthAnchor.constraint(equalToConstant: view.bounds.width).isActive = true
@@ -102,7 +102,7 @@ class LeaderboardViewController: UIViewController {
         placeLabel.topAnchor.constraint(equalTo: headerView.topAnchor).isActive = true
         
         let carLabel = UILabel()
-        carLabel.text = "CAR"
+        carLabel.text = Resources.Translates.carSectionName
         carLabel.font = UIFont(name: "PublicPixel", size: 14)
         carLabel.textColor = Resources.Colors.secondaryTextColor
         carLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -126,7 +126,7 @@ class LeaderboardViewController: UIViewController {
         dateLabel.topAnchor.constraint(equalTo: headerView.topAnchor).isActive = true
         
         let scoreLabel = UILabel()
-        scoreLabel.text = "SCORE"
+        scoreLabel.text = Resources.Translates.scoreSectionName
         scoreLabel.font = UIFont(name: "PublicPixel", size: 14)
         scoreLabel.textColor = Resources.Colors.secondaryTextColor
         scoreLabel.textAlignment = .right

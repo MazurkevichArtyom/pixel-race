@@ -68,7 +68,9 @@ class GameManager {
         collisionManager.stopObserving()
         
         if let gameResult = spawnerManager.gameResult() {
-            ResultsManager.saveResult(result: gameResult)
+            if gameResult.trafficCount > 0 {
+                ResultsManager.saveResult(result: gameResult)
+            }
         }
         
         viewController.navigationController?.popViewController(animated: false)
